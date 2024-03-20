@@ -1,5 +1,7 @@
 package ba.unsa.etf.nwt;
 
+import ba.unsa.etf.nwt.data.AppointmentEntity;
+import ba.unsa.etf.nwt.data.AppointmentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,21 +12,21 @@ import java.util.Date;
 @SpringBootApplication
 public class AppointmentHandlerApplication implements CommandLineRunner {
 	@Autowired
-	public RecordsRepository recordsRepository;
-	@Autowired
-	private
+	public AppointmentsRepository appointmentsRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(AppointmentHandlerApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		RecordEntity record = new RecordEntity();
-		record.setId(5);
-		record.setPatientID(2);
-		record.setImage("3");
-		record.setAppointmentID(7);
+		AppointmentEntity appointmentEntity = new AppointmentEntity();
+		appointmentEntity.setId(1);
+		appointmentEntity.setDate(new Date());
+		appointmentEntity.setPatientID(6);
+		appointmentEntity.setDentistID(6);
+		appointmentEntity.setNote("Test");
+		appointmentEntity.setServiceID(5);
 
-		recordsRepository.save(record);
+		appointmentsRepository.save(appointmentEntity);
 	}
 }
