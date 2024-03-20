@@ -16,4 +16,28 @@ public class DentistServiceEntity implements Serializable {
     private long id;
     private long serviceID;
     private long dentistID;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(long serviceID) {
+        this.serviceID = serviceID;
+    }
+
+    public long getDentistID() {
+        return dentistID;
+    }
+
+    public void setDentistID(long dentistID) {
+        this.dentistID = dentistID;
+    }
 }
