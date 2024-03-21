@@ -19,9 +19,9 @@ public class RecordsHandlerApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		RecordEntity record = new RecordEntity();
 		record.setId(1);
-		record.setPatientID(2);
+		record.setPatient(null);
 		record.setImage("3");
-		record.setAppointmentID(3);
+		record.setAppointment(null);
 
 		recordsRepository.save(record);
 	}

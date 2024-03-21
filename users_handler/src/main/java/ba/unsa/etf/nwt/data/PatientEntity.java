@@ -1,8 +1,6 @@
 package ba.unsa.etf.nwt.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -15,7 +13,8 @@ public class PatientEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = -2731425678149216052L;
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String address;
     private Date birthDate;
     private String phone;
