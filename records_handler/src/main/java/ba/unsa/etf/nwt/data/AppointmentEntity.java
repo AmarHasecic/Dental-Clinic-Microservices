@@ -1,12 +1,11 @@
 package ba.unsa.etf.nwt.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "appointments")
@@ -16,9 +15,18 @@ public class AppointmentEntity implements Serializable {
     @Id
     private long id;
     private Date date;
-    private long dentistID;
-    private long patientID;
-    private long serviceID;
+
+    @ManyToOne
+    @JoinColumn(name = "dentist_id")
+    private DentistEntity dentist;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private PatientEntity patient;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private ServiceEntity service;
     private String note;
 
     public long getId() {
@@ -37,29 +45,7 @@ public class AppointmentEntity implements Serializable {
         this.date = date;
     }
 
-    public long getDentistID() {
-        return dentistID;
-    }
 
-    public void setDentistID(long dentistID) {
-        this.dentistID = dentistID;
-    }
-
-    public long getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(long patientID) {
-        this.patientID = patientID;
-    }
-
-    public long getServiceID() {
-        return serviceID;
-    }
-
-    public void setServiceID(long serviceID) {
-        this.serviceID = serviceID;
-    }
 
     public String getNote() {
         return note;
@@ -67,5 +53,30 @@ public class AppointmentEntity implements Serializable {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+
+    public DentistEntity getDentist() {
+        return dentist;
+    }
+
+    public void setDentist(DentistEntity dentist) {
+        this.dentist = dentist;
+    }
+
+    public PatientEntity getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
+    }
+
+    public ServiceEntity getService() {
+        return service;
+    }
+
+    public void setService(ServiceEntity service) {
+        this.service = service;
     }
 }

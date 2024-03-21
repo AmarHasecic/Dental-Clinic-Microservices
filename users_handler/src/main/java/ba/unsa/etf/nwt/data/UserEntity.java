@@ -1,9 +1,6 @@
 package ba.unsa.etf.nwt.data;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -24,8 +21,14 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private String password;
     private char accessLevel;
-    private long patientID;
-    private long dentistID;
+
+    @OneToOne
+    @JoinColumn(name = "patient_id")
+    private PatientEntity patient;
+
+    @OneToOne
+    @JoinColumn(name = "dentist_id")
+    private DentistEntity dentist;
 
 
     public String getPassword() {
@@ -59,21 +62,6 @@ public class UserEntity implements Serializable {
         this.accessLevel = accessLevel;
     }
 
-    public long getPatientID() {
-        return patientID;
-    }
-
-    public void setPatientID(long patientID) {
-        this.patientID = patientID;
-    }
-
-    public long getDentistID() {
-        return dentistID;
-    }
-
-    public void setDentistID(long dentistID) {
-        this.dentistID = dentistID;
-    }
 
     public String getLastName() {
         return lastName;
@@ -89,5 +77,21 @@ public class UserEntity implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public PatientEntity getPatient() {
+        return patient;
+    }
+
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
+    }
+
+    public DentistEntity getDentist() {
+        return dentist;
+    }
+
+    public void setDentist(DentistEntity dentist) {
+        this.dentist = dentist;
     }
 }

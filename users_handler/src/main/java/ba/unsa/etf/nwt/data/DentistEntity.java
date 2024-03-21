@@ -16,6 +16,15 @@ public class DentistEntity implements Serializable {
     private long id;
     private String workHours;
 
+    public DentistEntity(long id, String workHours) {
+        this.id = id;
+        this.workHours = workHours;
+    }
+
+    public DentistEntity() {
+
+    }
+
     public long getId() {
         return id;
     }
