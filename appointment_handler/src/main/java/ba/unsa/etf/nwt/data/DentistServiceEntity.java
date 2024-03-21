@@ -1,8 +1,6 @@
 package ba.unsa.etf.nwt.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,8 +12,14 @@ public class DentistServiceEntity implements Serializable {
     private static final long serialVersionUID = -2731425678149216056L;
     @Id
     private long id;
-    private long serviceID;
-    private long dentistID;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private ServiceEntity service;
+
+    @ManyToOne
+    @JoinColumn(name = "dentist_id")
+    private DentistEntity dentist;
 
     public long getId() {
         return id;
@@ -25,19 +29,19 @@ public class DentistServiceEntity implements Serializable {
         this.id = id;
     }
 
-    public long getServiceID() {
-        return serviceID;
+    public ServiceEntity getService() {
+        return service;
     }
 
-    public void setServiceID(long serviceID) {
-        this.serviceID = serviceID;
+    public void setService(ServiceEntity service) {
+        this.service = service;
     }
 
-    public long getDentistID() {
-        return dentistID;
+    public DentistEntity getDentist() {
+        return dentist;
     }
 
-    public void setDentistID(long dentistID) {
-        this.dentistID = dentistID;
+    public void setDentist(DentistEntity dentist) {
+        this.dentist = dentist;
     }
 }
