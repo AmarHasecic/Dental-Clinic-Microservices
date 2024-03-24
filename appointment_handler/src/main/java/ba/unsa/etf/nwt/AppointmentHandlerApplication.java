@@ -1,7 +1,7 @@
 package ba.unsa.etf.nwt;
 
-import ba.unsa.etf.nwt.data.AppointmentEntity;
-import ba.unsa.etf.nwt.data.AppointmentsRepository;
+import ba.unsa.etf.nwt.repository.AppointmentEntity;
+import ba.unsa.etf.nwt.repository.AppointmentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

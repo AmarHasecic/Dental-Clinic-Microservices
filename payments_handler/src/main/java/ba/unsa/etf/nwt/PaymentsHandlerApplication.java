@@ -1,7 +1,7 @@
 package ba.unsa.etf.nwt;
 
-import ba.unsa.etf.nwt.data.PaymentEntity;
-import ba.unsa.etf.nwt.data.PaymentsRepository;
+import ba.unsa.etf.nwt.repository.PaymentEntity;
+import ba.unsa.etf.nwt.repository.PaymentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

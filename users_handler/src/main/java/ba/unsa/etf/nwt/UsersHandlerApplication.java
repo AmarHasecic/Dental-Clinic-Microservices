@@ -1,9 +1,9 @@
 package ba.unsa.etf.nwt;
 
-import ba.unsa.etf.nwt.data.DentistEntity;
-import ba.unsa.etf.nwt.data.UserEntity;
-import ba.unsa.etf.nwt.data.UsersRepository;
-import ba.unsa.etf.nwt.data.DentistsRepository;
+import ba.unsa.etf.nwt.repository.DentistEntity;
+import ba.unsa.etf.nwt.repository.UserEntity;
+import ba.unsa.etf.nwt.repository.UsersRepository;
+import ba.unsa.etf.nwt.repository.DentistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
