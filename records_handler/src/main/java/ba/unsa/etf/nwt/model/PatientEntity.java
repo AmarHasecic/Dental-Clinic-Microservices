@@ -11,9 +11,6 @@ import java.util.Date;
 @Entity
 @Table(name="patients")
 public class PatientEntity implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = -2731425678149216052L;
     @Id
     private long id;
     private String address;

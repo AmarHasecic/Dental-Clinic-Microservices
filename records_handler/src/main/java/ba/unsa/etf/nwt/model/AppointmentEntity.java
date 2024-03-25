@@ -9,8 +9,6 @@ import java.util.Date;
 @Entity
 @Table(name = "appointments")
 public class AppointmentEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2731425678149216052L;
     @Id
     private long id;
     private Date date;

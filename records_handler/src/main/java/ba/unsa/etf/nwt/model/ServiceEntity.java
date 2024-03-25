@@ -10,8 +10,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "services")
 public class ServiceEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2731425678149216056L;
     @Id
     private long id;
     private String name;
