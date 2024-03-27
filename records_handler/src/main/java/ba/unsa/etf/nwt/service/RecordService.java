@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RecordService {
     RecordDto createRecord(RecordDto record);
-    RecordDto findRecordById(Long id);
+    RecordDto findRecordById(Long patientId,Long recordId);
     List<RecordDto> findRecordsByPatient(Long patientId);
     void updateRecord(RecordDto record);
 }

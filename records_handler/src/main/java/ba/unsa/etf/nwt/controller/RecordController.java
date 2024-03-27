@@ -3,12 +3,15 @@ package ba.unsa.etf.nwt.controller;
 
 import ba.unsa.etf.nwt.dto.RecordDto;
 import ba.unsa.etf.nwt.service.RecordServiceImpl;
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
@@ -35,18 +38,40 @@ public class RecordController {
 
     @GetMapping("/{patientId}/{recordId}")
     public ResponseEntity<RecordDto> findRecordById(@PathVariable Long patientId,@PathVariable Long recordId){
-        RecordDto record = recordService.findRecordById(recordId);
-        if(record != null){
-            if(record.getPatient().getId() != patientId){
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(record, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        RecordDto record = recordService.findRecordById(patientId,recordId);
+        return new ResponseEntity<>(record, HttpStatus.OK);
     }
 
     @GetMapping("/{patientId}")
-    public List<RecordDto> findRecords(@PathVariable Long patientId){
-        return recordService.findRecordsByPatient(patientId);
+    public ResponseEntity<List<RecordDto>> findRecords(@PathVariable Long patientId){
+        List<RecordDto> recordList = recordService.findRecordsByPatient(patientId);
+        if(recordList.isEmpty()){
+            return new ResponseEntity<>(recordList,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(recordList,HttpStatus.OK);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
+
+        String message =ex.getMessage();
+        message = message.replace("ba.unsa.etf.nwt.model.","");
+        message = message.replace("Entity", "");
+        return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
+        return new ResponseEntity<>("Record for Appointment already exists",HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<String> handleNullPointerException(NullPointerException ex) {
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);
     }
 }
