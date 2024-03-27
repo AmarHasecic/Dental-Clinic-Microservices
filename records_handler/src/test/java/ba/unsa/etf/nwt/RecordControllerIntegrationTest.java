@@ -3,11 +3,13 @@ package ba.unsa.etf.nwt;
 import ba.unsa.etf.nwt.dto.RecordDto;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
 import ba.unsa.etf.nwt.model.PatientEntity;
+import ba.unsa.etf.nwt.model.RecordEntity;
 import ba.unsa.etf.nwt.repository.AppointmentsRepository;
 import ba.unsa.etf.nwt.repository.PatientsRepository;
 import ba.unsa.etf.nwt.repository.RecordsRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -43,8 +46,8 @@ public class RecordControllerIntegrationTest {
     @Autowired
     private AppointmentsRepository appointmentsRepository;
 
-    @Test
-    public void successfullyCreateRecord() throws Exception {
+    @Before
+    public void populateBase(){
         PatientEntity patient = new PatientEntity();
         patient.setId(1);
         patient.setAddress("Address");
@@ -60,10 +63,44 @@ public class RecordControllerIntegrationTest {
         appointment.setNote("Note");
         appointmentsRepository.save(appointment);
 
+        appointment = new AppointmentEntity();
+        appointment.setId(2);
+        appointment.setPatient(patient);
+        appointment.setDate(new Date());
+        appointment.setNote("Note");
+        appointmentsRepository.save(appointment);
+
+        RecordEntity record = new RecordEntity();
+        record.setId(1L);
+        record.setAppointment(appointment);
+        record.setPatient(patient);
+        record.setImage("src");
+        recordsRepository.save(record);
+
+    }
+    @After
+    public void emptyBase(){
+        recordsRepository.deleteAll();
+        appointmentsRepository.deleteAll();
+        patientsRepository.deleteAll();
+    }
+    private RecordDto createRecordDto(){
+        PatientEntity patient = new PatientEntity();
+        patient.setId(1);
+
+        AppointmentEntity appointment = new AppointmentEntity();
+        appointment.setId(1);
+
         RecordDto recordDto = new RecordDto();
         recordDto.setAppointment(appointment);
         recordDto.setPatient(patient);
         recordDto.setImage("url");
+        return recordDto;
+    }
+
+    @Test
+    public void successfullyCreateRecord() throws Exception {
+        RecordDto recordDto = createRecordDto();
 
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(recordDto);
@@ -73,6 +110,20 @@ public class RecordControllerIntegrationTest {
                 .content(json)
                 .characterEncoding("utf-8"))
                 .andExpect(status().isCreated())
+                .andReturn();
+    }
+
+    @Test
+    public void successfullyGetPatientRecord() throws Exception {
+        mvc.perform(get("/records/1/1"))
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    public void successfullyGetPatientRecords() throws Exception {
+        mvc.perform(get("/records/1"))
+                .andExpect(status().isOk())
                 .andReturn();
     }
 }
