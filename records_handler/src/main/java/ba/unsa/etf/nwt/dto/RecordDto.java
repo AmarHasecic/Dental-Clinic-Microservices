@@ -2,11 +2,14 @@ package ba.unsa.etf.nwt.dto;
 
 import ba.unsa.etf.nwt.model.AppointmentEntity;
 import ba.unsa.etf.nwt.model.PatientEntity;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
 public class RecordDto implements Serializable {
+    @NotNull
     private PatientEntity patient;
+    @NotNull
     private AppointmentEntity appointment;
     private String image;
     private Long id;

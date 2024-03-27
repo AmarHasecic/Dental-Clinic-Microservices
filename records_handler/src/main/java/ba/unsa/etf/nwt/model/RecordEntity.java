@@ -2,7 +2,6 @@ package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity

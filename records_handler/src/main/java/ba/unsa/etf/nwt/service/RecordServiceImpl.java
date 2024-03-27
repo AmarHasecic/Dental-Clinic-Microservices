@@ -1,6 +1,7 @@
 package ba.unsa.etf.nwt.service;
 
 import ba.unsa.etf.nwt.dto.RecordDto;
+import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.RecordEntity;
 import ba.unsa.etf.nwt.repository.RecordsRepository;
 import org.modelmapper.ModelMapper;
@@ -25,9 +26,9 @@ public class RecordServiceImpl implements RecordService{
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         RecordEntity recordEntity = modelMapper.map(record, RecordEntity.class);
-
-        recordsRepository.save(recordEntity);
-        return record;
+        System.out.println(recordEntity);
+        RecordEntity re = recordsRepository.save(recordEntity);
+        return modelMapper.map(re,RecordDto.class);
     }
 
     @Override
