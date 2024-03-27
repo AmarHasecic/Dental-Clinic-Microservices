@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.repository;
+package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
