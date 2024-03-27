@@ -2,7 +2,6 @@ package ba.unsa.etf.nwt.service;
 
 import ba.unsa.etf.nwt.dto.RecordDto;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
-import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.RecordEntity;
 import ba.unsa.etf.nwt.repository.AppointmentsRepository;
 import ba.unsa.etf.nwt.repository.PatientsRepository;
