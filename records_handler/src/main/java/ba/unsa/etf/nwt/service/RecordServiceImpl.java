@@ -1,13 +1,13 @@
 package ba.unsa.etf.nwt.service;
 
 import ba.unsa.etf.nwt.dto.RecordDto;
-import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.RecordEntity;
 import ba.unsa.etf.nwt.repository.RecordsRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class RecordServiceImpl implements RecordService{
 
     @Override
     public RecordDto createRecord(RecordDto record) {
-        record.setId(Long.valueOf(Math.abs((new SecureRandom()).nextLong())));
+        record.setId(Math.abs((new SecureRandom()).nextLong()));
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         RecordEntity recordEntity = modelMapper.map(record, RecordEntity.class);
