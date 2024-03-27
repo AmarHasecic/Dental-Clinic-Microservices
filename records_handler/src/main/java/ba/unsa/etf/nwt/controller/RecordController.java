@@ -24,11 +24,6 @@ public class RecordController {
         this.recordService = recordService;
     }
 
-    @GetMapping("/status/check")
-    public String status(){
-        return "Service is live";
-    }
-
     @PostMapping
     public ResponseEntity<RecordDto> createRecord(@RequestBody RecordCreateRequest request){
         ModelMapper modelMapper = new ModelMapper();
