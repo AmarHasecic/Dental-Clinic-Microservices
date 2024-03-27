@@ -27,8 +27,6 @@ public class DentistController {
         return ResponseEntity.ok(dentists);
     }
 
-
-
     @PostMapping
     public ResponseEntity<DentistEntity> createDentist(@RequestBody DentistEntity dentist) {
         DentistEntity savedDentist = dentistRepository.save(dentist);
