@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.repository;
+package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
@@ -10,8 +10,11 @@ import java.io.Serializable;
 public class UserEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = -2731425678149216053L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(nullable = false, length = 50)
     private String firstName;
     @Column(nullable = false, length = 50)
