@@ -8,5 +8,5 @@ public interface RecordService {
     RecordDto createRecord(RecordDto record);
     RecordDto findRecordById(Long patientId,Long recordId);
     List<RecordDto> findRecordsByPatient(Long patientId);
-    void updateRecord(RecordDto record);
+    RecordDto updateRecord(RecordDto record);
 }
