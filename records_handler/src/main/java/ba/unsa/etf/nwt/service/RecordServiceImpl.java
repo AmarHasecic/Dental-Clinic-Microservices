@@ -85,9 +85,9 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public void updateRecord(RecordDto record) {
+    public RecordDto updateRecord(RecordDto record) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        recordsRepository.save(modelMapper.map(record, RecordEntity.class));
+        return modelMapper.map(recordsRepository.save(modelMapper.map(record, RecordEntity.class)), RecordDto.class);
     }
 }
