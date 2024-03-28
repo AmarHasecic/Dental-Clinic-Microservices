@@ -28,11 +28,7 @@ public class RecordController {
 
     @PostMapping
     public ResponseEntity<RecordDto> createRecord(@RequestBody RecordDto request){
-        ModelMapper modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-
-        RecordDto recordDto = modelMapper.map(request, RecordDto.class);
-        recordDto = recordService.createRecord(recordDto);
+        RecordDto recordDto = recordService.createRecord(request);
         return new ResponseEntity<>(recordDto, HttpStatus.CREATED);
     }
 
@@ -49,6 +45,12 @@ public class RecordController {
             return new ResponseEntity<>(recordList,HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(recordList,HttpStatus.OK);
+    }
+
+    @PutMapping("/{patientId/{recordId")
+    public ResponseEntity<RecordDto> updateRecord(@PathVariable Long patientId, @PathVariable Long recordId, @RequestBody RecordDto request){
+        RecordDto recordDto = recordService.updateRecord(request);
+        return new ResponseEntity<>(recordDto, HttpStatus.CREATED);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
