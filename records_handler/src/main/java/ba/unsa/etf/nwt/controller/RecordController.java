@@ -5,6 +5,8 @@ import ba.unsa.etf.nwt.dto.RecordDto;
 import ba.unsa.etf.nwt.service.RecordServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,19 +14,22 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+@RefreshScope
 @RestController
 @RequestMapping("/records")
 public class RecordController {
 
     public final RecordServiceImpl recordService;
     @Autowired
-    public RecordController(RecordServiceImpl recordService) {
+    public RecordController(RecordServiceImpl recordService, Environment env) {
         this.recordService = recordService;
+        this.env = env;
     }
+    public final Environment env;
 
     @GetMapping("/health/status")
     public ResponseEntity<String> healthCheck(){
-        return new ResponseEntity<>("Live.",HttpStatus.OK);
+        return new ResponseEntity<>("Live. "+env.getProperty("config.status.environment.variable"),HttpStatus.OK);
     }
 
     @PostMapping
