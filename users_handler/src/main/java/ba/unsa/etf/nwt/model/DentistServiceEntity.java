@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.repository;
+package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
@@ -8,9 +8,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "dentistservice")
 public class DentistServiceEntity implements Serializable {
-    @Serial
     private static final long serialVersionUID = -2731425678149216056L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
@@ -20,6 +21,16 @@ public class DentistServiceEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "dentist_id")
     private DentistEntity dentist;
+
+    // Default constructor
+    public DentistServiceEntity() {
+    }
+
+    // Constructor with parameters
+    public DentistServiceEntity(ServiceEntity service, DentistEntity dentist) {
+        this.service = service;
+        this.dentist = dentist;
+    }
 
     public long getId() {
         return id;
