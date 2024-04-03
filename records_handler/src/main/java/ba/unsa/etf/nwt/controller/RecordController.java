@@ -4,8 +4,6 @@ package ba.unsa.etf.nwt.controller;
 import ba.unsa.etf.nwt.dto.RecordDto;
 import ba.unsa.etf.nwt.service.RecordServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +45,7 @@ public class RecordController {
         return new ResponseEntity<>(recordList,HttpStatus.OK);
     }
 
-    @PutMapping("/{patientId/{recordId")
+    @PutMapping("/{patientId}/{recordId}")
     public ResponseEntity<RecordDto> updateRecord(@PathVariable Long patientId, @PathVariable Long recordId, @RequestBody RecordDto request){
         RecordDto recordDto = recordService.updateRecord(request);
         return new ResponseEntity<>(recordDto, HttpStatus.CREATED);
@@ -64,7 +62,7 @@ public class RecordController {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
-        return new ResponseEntity<>("Record for Appointment already exists",HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
