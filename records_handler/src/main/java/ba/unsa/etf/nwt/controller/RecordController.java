@@ -16,12 +16,15 @@ import java.util.List;
 @RequestMapping("/records")
 public class RecordController {
 
-    final
-    RecordServiceImpl recordService;
-
+    public final RecordServiceImpl recordService;
     @Autowired
     public RecordController(RecordServiceImpl recordService) {
         this.recordService = recordService;
+    }
+
+    @GetMapping("/health/status")
+    public ResponseEntity<String> healthCheck(){
+        return new ResponseEntity<>("Live.",HttpStatus.OK);
     }
 
     @PostMapping

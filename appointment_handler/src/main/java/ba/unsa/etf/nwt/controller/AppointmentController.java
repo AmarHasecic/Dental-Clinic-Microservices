@@ -17,6 +17,11 @@ public class AppointmentController {
     @Autowired
     private AppointmentsRepository appointmentsRepository;
 
+    @GetMapping("/health/status")
+    public ResponseEntity<String> healthCheck(){
+        return new ResponseEntity<>("Live.",HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<AppointmentEntity>> getAllAppointments() {
         List<AppointmentEntity> appointments = (List<AppointmentEntity>) appointmentsRepository.findAll();
