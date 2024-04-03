@@ -1,6 +1,8 @@
 package ba.unsa.etf.nwt.controller;
 
 
+import ba.unsa.etf.nwt.dto.DentistDto;
+import ba.unsa.etf.nwt.dto.PatientDto;
 import ba.unsa.etf.nwt.dto.UserDto;
 import ba.unsa.etf.nwt.service.UserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,13 +27,25 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto request){
+
+
+    @PostMapping("/dentist")
+    public ResponseEntity<UserDto> createDentist(@RequestBody DentistDto request){
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        UserDto userDto = modelMapper.map(request, UserDto.class);
-        userDto = userService.createUser(userDto);
+        DentistDto dentistDto = modelMapper.map(request, DentistDto.class);
+        UserDto userDto = userService.createDentist(dentistDto);
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/patient")
+    public ResponseEntity<UserDto> createPatient(@RequestBody PatientDto request){
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        PatientDto patientDto = modelMapper.map(request, PatientDto.class);
+        UserDto userDto = userService.createPatient(patientDto);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
@@ -54,7 +68,7 @@ public class UserController {
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
-        return new ResponseEntity<>("Record for Appointment already exists",HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("User with that ID already exists",HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
