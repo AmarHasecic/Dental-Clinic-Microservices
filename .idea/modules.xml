@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/NWT_CET_TIM4.iml" filepath="$PROJECT_DIR$/.idea/NWT_CET_TIM4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/records_handler/records-app.iml" filepath="$PROJECT_DIR$/records_handler/records-app.iml" />
     </modules>
   </component>
 </project>
