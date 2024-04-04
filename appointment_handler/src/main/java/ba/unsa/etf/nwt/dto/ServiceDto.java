@@ -1,28 +1,21 @@
-package ba.unsa.etf.nwt.model;
-
-import jakarta.persistence.*;
+package ba.unsa.etf.nwt.dto;
 
 import java.io.Serializable;
 
-@Entity
-@Table(name = "services")
-public class ServiceEntity implements Serializable {
-
-    @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ServiceDto implements Serializable {
     private long id;
     private String name;
     private String type;
     private int price;
 
-    public ServiceEntity(long id, String name, String type, int price) {
+    public ServiceDto() {
+    }
+
+    public ServiceDto(long id, String name, String type, int price) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
-    }
-
-    public ServiceEntity() {
     }
 
     public long getId() {
