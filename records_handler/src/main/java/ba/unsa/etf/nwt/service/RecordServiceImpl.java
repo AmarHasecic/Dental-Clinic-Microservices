@@ -90,6 +90,9 @@ public class RecordServiceImpl implements RecordService {
     public RecordResponseDto updateRecord(RecordRequestDto record) {
         RecordEntity recordEntity = createRecordEntityFromRequest(record);
         recordEntity.setId(record.getId());
+        if (recordsRepository.findById(record.getId()).isEmpty()) {
+            throw new EntityNotFoundException("Unable to find record with id " + record.getId());
+        }
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper.map(recordsRepository.save(recordEntity), RecordResponseDto.class);
