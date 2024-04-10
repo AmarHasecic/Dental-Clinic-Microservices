@@ -11,7 +11,7 @@
 	<groupId>ba.unsa.etf.nwt</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>appointment_handler</name>
+	<name>appointment-api</name>
 	<description>Spring Boot project.</description>
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>

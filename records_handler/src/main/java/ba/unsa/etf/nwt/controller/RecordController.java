@@ -3,6 +3,7 @@ package ba.unsa.etf.nwt.controller;
 
 //import ba.unsa.etf.nwt.client.AppointmentClient;
 
+import ba.unsa.etf.nwt.client.AppointmentClient;
 import ba.unsa.etf.nwt.dto.RecordRequestDto;
 import ba.unsa.etf.nwt.dto.RecordResponseDto;
 import ba.unsa.etf.nwt.service.RecordServiceImpl;
@@ -23,19 +24,24 @@ import java.util.List;
 public class RecordController {
 
     public final RecordServiceImpl recordService;
+    public final AppointmentClient appointmentClient;
+    public final Environment env;
 
-    //    public final AppointmentClient appointmentClient;
     @Autowired
-    public RecordController(RecordServiceImpl recordService, Environment env) {
+    public RecordController(RecordServiceImpl recordService, AppointmentClient appointmentClient, Environment env) {
         this.recordService = recordService;
+        this.appointmentClient = appointmentClient;
         this.env = env;
     }
-
-    public final Environment env;
 
     @GetMapping("/health/status")
     public ResponseEntity<String> healthCheck() {
         return new ResponseEntity<>("Live.\nPort: " + env.getProperty("local.server.port"), HttpStatus.OK);
+    }
+
+    @GetMapping("appointments/health/status")
+    public ResponseEntity<String> appointmentHealthCheck() {
+        return new ResponseEntity<>(appointmentClient.getHealthStatus(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -63,29 +69,5 @@ public class RecordController {
     public ResponseEntity<RecordResponseDto> updateRecord(@PathVariable Long patientId, @PathVariable Long recordId, @RequestBody RecordRequestDto request) {
         RecordResponseDto recordResponseDto = recordService.updateRecord(request);
         return new ResponseEntity<>(recordResponseDto, HttpStatus.CREATED);
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
-
-        String message = ex.getMessage();
-        message = message.replace("ba.unsa.etf.nwt.model.", "");
-        message = message.replace("Entity", "");
-        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<String> handleNullPointerException(NullPointerException ex) {
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
