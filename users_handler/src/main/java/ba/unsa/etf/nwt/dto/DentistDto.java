@@ -1,19 +1,17 @@
 package ba.unsa.etf.nwt.dto;
 
-import ba.unsa.etf.nwt.model.DentistEntity;
-import ba.unsa.etf.nwt.model.UserEntity;
-
 import java.io.Serializable;
 
-public class UserDto implements Serializable {
+public class DentistDto implements Serializable {
 
     private Long id;
     private String mail;
     private String password;
     private String firstName;
     private String lastName;
-    private Long patientId;
-    private Long dentistId;
+    private String workHours;
+
+
 
     public Long getId() {
         return id;
@@ -39,22 +37,6 @@ public class UserDto implements Serializable {
         this.password = password;
     }
 
-    public Long getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(Long userId) {
-        this.patientId = userId;
-    }
-
-    public Long getDentistId() {
-        return dentistId;
-    }
-
-    public void setDentistId(Long dentistId) {
-        this.dentistId = dentistId;
-    }
-
 
     public String getFirstName() {
         return firstName;
@@ -70,5 +52,13 @@ public class UserDto implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getWorkHours() {
+        return workHours;
+    }
+
+    public void setWorkHours(String workHours) {
+        this.workHours = workHours;
     }
 }
