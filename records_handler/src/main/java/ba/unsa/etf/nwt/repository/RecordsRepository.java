@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface RecordsRepository extends CrudRepository<RecordEntity, Long> {
     Optional<RecordEntity> findById(Long id);
+
     List<RecordEntity> findAllByPatientId(Long patinetId);
 }

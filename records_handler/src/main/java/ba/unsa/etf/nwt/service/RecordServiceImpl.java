@@ -1,7 +1,7 @@
 package ba.unsa.etf.nwt.service;
 
-import ba.unsa.etf.nwt.dto.RecordResponseDto;
 import ba.unsa.etf.nwt.dto.RecordRequestDto;
+import ba.unsa.etf.nwt.dto.RecordResponseDto;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
 import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.RecordEntity;
@@ -42,11 +42,11 @@ public class RecordServiceImpl implements RecordService {
             if (appointment.get().getPatient().getId() != record.getPatientId()) {
                 throw new IllegalArgumentException("Appointment with id: " + record.getAppointmentId() + " was not for patient with id: " + record.getPatientId());
             }
-        }else{
-            throw new EntityNotFoundException("Unable to find Appointment with id "+record.getAppointmentId());
+        } else {
+            throw new EntityNotFoundException("Unable to find Appointment with id " + record.getAppointmentId());
         }
         RecordEntity recordEntity = createRecordEntityFromRequest(record);
-        recordEntity.setId(Math.abs((new SecureRandom()).nextLong())%1000000000L);
+        recordEntity.setId(Math.abs((new SecureRandom()).nextLong()) % 1000000000L);
 
         RecordEntity re = recordsRepository.save(recordEntity);
         ModelMapper modelMapper = new ModelMapper();
@@ -56,15 +56,15 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public RecordResponseDto findRecordById(Long patientId, Long recordId) {
-        if(patientsRepository.findById(patientId).isEmpty()){
-            throw new NullPointerException("Patient with id "+patientId+" doesn't exist");
+        if (patientsRepository.findById(patientId).isEmpty()) {
+            throw new NullPointerException("Patient with id " + patientId + " doesn't exist");
         }
         Optional<RecordEntity> entity = recordsRepository.findById(recordId);
-        if(entity.isEmpty()){
-            throw new NullPointerException("Record with id "+recordId+" doesn't exist");
+        if (entity.isEmpty()) {
+            throw new NullPointerException("Record with id " + recordId + " doesn't exist");
         }
-        if(patientId != entity.get().getPatient().getId()){
-            throw new NullPointerException("Record with id "+recordId+" doesn't exist");
+        if (patientId != entity.get().getPatient().getId()) {
+            throw new NullPointerException("Record with id " + recordId + " doesn't exist");
         }
 
         ModelMapper modelMapper = new ModelMapper();
@@ -75,8 +75,8 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public List<RecordResponseDto> findRecordsByPatient(Long patientId) {
-        if(patientsRepository.findById(patientId).isEmpty()){
-            throw new NullPointerException("Patient with id "+patientId+" doesn't exist");
+        if (patientsRepository.findById(patientId).isEmpty()) {
+            throw new NullPointerException("Patient with id " + patientId + " doesn't exist");
         }
         List<RecordEntity> recordsList = recordsRepository.findAllByPatientId(patientId);
 

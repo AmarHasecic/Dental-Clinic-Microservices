@@ -2,7 +2,6 @@ package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -41,7 +40,6 @@ public class AppointmentEntity implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-
 
 
     public String getNote() {

@@ -47,7 +47,7 @@ public class RecordControllerIntegrationTest {
     private AppointmentsRepository appointmentsRepository;
 
     @Before
-    public void populateBase(){
+    public void populateBase() {
         PatientEntity patient = new PatientEntity();
         patient.setId(1);
         patient.setAddress("Address");
@@ -78,13 +78,15 @@ public class RecordControllerIntegrationTest {
         recordsRepository.save(record);
 
     }
+
     @After
-    public void emptyBase(){
+    public void emptyBase() {
         recordsRepository.deleteAll();
         appointmentsRepository.deleteAll();
         patientsRepository.deleteAll();
     }
-    private RecordResponseDto createRecordDto(){
+
+    private RecordResponseDto createRecordDto() {
         PatientEntity patient = new PatientEntity();
         patient.setId(1);
 
@@ -106,9 +108,9 @@ public class RecordControllerIntegrationTest {
         String json = objectMapper.writeValueAsString(recordResponseDto);
 
         mvc.perform(post("/records")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json)
-                .characterEncoding("utf-8"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                        .characterEncoding("utf-8"))
                 .andExpect(status().isCreated())
                 .andReturn();
     }

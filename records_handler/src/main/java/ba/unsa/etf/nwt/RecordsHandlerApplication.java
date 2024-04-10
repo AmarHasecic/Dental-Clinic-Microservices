@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class RecordsHandlerApplication{
-	public static void main(String[] args) {
-		SpringApplication.run(RecordsHandlerApplication.class, args);
-	}
+public class RecordsHandlerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(RecordsHandlerApplication.class, args);
+    }
 
 }
