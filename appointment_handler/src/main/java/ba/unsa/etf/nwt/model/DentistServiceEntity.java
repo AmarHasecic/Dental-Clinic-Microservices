@@ -1,6 +1,7 @@
 package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,17 +9,19 @@ import java.io.Serializable;
 @Entity
 @Table(name = "dentistservice")
 public class DentistServiceEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2731425678149216056L;
+
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
+    @NotNull
     private ServiceEntity service;
 
     @ManyToOne
     @JoinColumn(name = "dentist_id")
+    @NotNull
     private DentistEntity dentist;
 
     public long getId() {

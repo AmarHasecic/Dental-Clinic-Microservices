@@ -1,8 +1,6 @@
 package ba.unsa.etf.nwt.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -10,11 +8,19 @@ import java.io.Serializable;
 @Entity
 @Table(name = "dentists")
 public class DentistEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2731425678149216052L;
+
     @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String workHours;
+
+    public DentistEntity(long id, String workHours) {
+        this.id = id;
+        this.workHours = workHours;
+    }
+
+    public DentistEntity() {
+    }
 
     public long getId() {
         return id;

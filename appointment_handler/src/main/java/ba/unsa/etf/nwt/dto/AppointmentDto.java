@@ -1,66 +1,35 @@
-package ba.unsa.etf.nwt.model;
+package ba.unsa.etf.nwt.dto;
 
-import jakarta.persistence.*;
+import ba.unsa.etf.nwt.model.DentistEntity;
+import ba.unsa.etf.nwt.model.PatientEntity;
+import ba.unsa.etf.nwt.model.ServiceEntity;
 import jakarta.validation.constraints.NotNull;
 
-import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
 
-@Entity
-@Table(name = "appointments")
-public class AppointmentEntity implements Serializable {
+public class AppointmentDto implements Serializable {
 
-    @Id
-   //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
-    @NotNull
-    private Date date;
-
-    @ManyToOne
-    @JoinColumn(name = "dentist_id")
+    private Long id;
     @NotNull
     private DentistEntity dentist;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
     @NotNull
     private PatientEntity patient;
 
-    @ManyToOne
-    @JoinColumn(name = "service_id")
     @NotNull
     private ServiceEntity service;
-
     private String note;
 
-    public AppointmentEntity(long id, Date date, DentistEntity dentist, PatientEntity patient, ServiceEntity service, String note) {
+    public AppointmentDto(Long id,DentistEntity dentist, PatientEntity patient, ServiceEntity service, String note) {
         this.id = id;
-        this.date = date;
         this.dentist = dentist;
         this.patient = patient;
         this.service = service;
         this.note = note;
     }
 
-    public AppointmentEntity() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public AppointmentDto() {
     }
 
     public DentistEntity getDentist() {
@@ -85,6 +54,14 @@ public class AppointmentEntity implements Serializable {
 
     public void setService(ServiceEntity service) {
         this.service = service;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNote() {
