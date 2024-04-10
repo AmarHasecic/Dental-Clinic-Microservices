@@ -1,7 +1,9 @@
 package ba.unsa.etf.nwt.service;
 
-import ba.unsa.etf.nwt.dto.RecordDto;
+import ba.unsa.etf.nwt.dto.RecordResponseDto;
+import ba.unsa.etf.nwt.dto.RecordRequestDto;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
+import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.RecordEntity;
 import ba.unsa.etf.nwt.repository.AppointmentsRepository;
 import ba.unsa.etf.nwt.repository.PatientsRepository;
@@ -34,26 +36,26 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public RecordDto createRecord(RecordDto record) {
-        Optional<AppointmentEntity> appointment = appointmentsRepository.findById(record.getAppointment().getId());
+    public RecordResponseDto createRecord(RecordRequestDto record) {
+        Optional<AppointmentEntity> appointment = appointmentsRepository.findById(record.getAppointmentId());
         if (appointment.isPresent()) {
-            if (appointment.get().getPatient().getId() != record.getPatient().getId()) {
-                throw new IllegalArgumentException("Appointment with id: " + record.getAppointment().getId() + " was not for patient with id: " + record.getPatient().getId());
+            if (appointment.get().getPatient().getId() != record.getPatientId()) {
+                throw new IllegalArgumentException("Appointment with id: " + record.getAppointmentId() + " was not for patient with id: " + record.getPatientId());
             }
         }else{
-            throw new EntityNotFoundException("Unable to find Appointment with id "+record.getAppointment().getId());
+            throw new EntityNotFoundException("Unable to find Appointment with id "+record.getAppointmentId());
         }
-        record.setId(Math.abs((new SecureRandom()).nextLong()));
+        RecordEntity recordEntity = createRecordEntityFromRequest(record);
+        recordEntity.setId(Math.abs((new SecureRandom()).nextLong())%1000000000L);
+
+        RecordEntity re = recordsRepository.save(recordEntity);
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        RecordEntity recordEntity = modelMapper.map(record, RecordEntity.class);
-        System.out.println(recordEntity);
-        RecordEntity re = recordsRepository.save(recordEntity);
-        return modelMapper.map(re, RecordDto.class);
+        return modelMapper.map(re, RecordResponseDto.class);
     }
 
     @Override
-    public RecordDto findRecordById(Long patientId, Long recordId) {
+    public RecordResponseDto findRecordById(Long patientId, Long recordId) {
         if(patientsRepository.findById(patientId).isEmpty()){
             throw new NullPointerException("Patient with id "+patientId+" doesn't exist");
         }
@@ -68,11 +70,11 @@ public class RecordServiceImpl implements RecordService {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        return entity.map(recordEntity -> modelMapper.map(recordEntity, RecordDto.class)).orElse(null);
+        return entity.map(recordEntity -> modelMapper.map(recordEntity, RecordResponseDto.class)).orElse(null);
     }
 
     @Override
-    public List<RecordDto> findRecordsByPatient(Long patientId) {
+    public List<RecordResponseDto> findRecordsByPatient(Long patientId) {
         if(patientsRepository.findById(patientId).isEmpty()){
             throw new NullPointerException("Patient with id "+patientId+" doesn't exist");
         }
@@ -81,13 +83,28 @@ public class RecordServiceImpl implements RecordService {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        return recordsList.stream().map(recordEntity -> modelMapper.map(recordEntity, RecordDto.class)).toList();
+        return recordsList.stream().map(recordEntity -> modelMapper.map(recordEntity, RecordResponseDto.class)).toList();
     }
 
     @Override
-    public RecordDto updateRecord(RecordDto record) {
+    public RecordResponseDto updateRecord(RecordRequestDto record) {
+        RecordEntity recordEntity = createRecordEntityFromRequest(record);
+        recordEntity.setId(record.getId());
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        return modelMapper.map(recordsRepository.save(modelMapper.map(record, RecordEntity.class)), RecordDto.class);
+        return modelMapper.map(recordsRepository.save(recordEntity), RecordResponseDto.class);
     }
+
+    private RecordEntity createRecordEntityFromRequest(RecordRequestDto record) {
+        RecordEntity recordEntity = new RecordEntity();
+        AppointmentEntity appointmentEntity = new AppointmentEntity();
+        appointmentEntity.setId(record.getAppointmentId());
+        recordEntity.setAppointment(appointmentEntity);
+        recordEntity.setImage(record.getImage());
+        PatientEntity patientEntity = new PatientEntity();
+        patientEntity.setId(record.getPatientId());
+        recordEntity.setPatient(patientEntity);
+        return recordEntity;
+    }
+
 }

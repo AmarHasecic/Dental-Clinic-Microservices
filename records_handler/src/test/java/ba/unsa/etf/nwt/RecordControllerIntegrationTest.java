@@ -1,6 +1,6 @@
 package ba.unsa.etf.nwt;
 
-import ba.unsa.etf.nwt.dto.RecordDto;
+import ba.unsa.etf.nwt.dto.RecordResponseDto;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
 import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.RecordEntity;
@@ -84,26 +84,26 @@ public class RecordControllerIntegrationTest {
         appointmentsRepository.deleteAll();
         patientsRepository.deleteAll();
     }
-    private RecordDto createRecordDto(){
+    private RecordResponseDto createRecordDto(){
         PatientEntity patient = new PatientEntity();
         patient.setId(1);
 
         AppointmentEntity appointment = new AppointmentEntity();
         appointment.setId(1);
 
-        RecordDto recordDto = new RecordDto();
-        recordDto.setAppointment(appointment);
-        recordDto.setPatient(patient);
-        recordDto.setImage("url");
-        return recordDto;
+        RecordResponseDto recordResponseDto = new RecordResponseDto();
+        recordResponseDto.setAppointment(appointment);
+        recordResponseDto.setPatient(patient);
+        recordResponseDto.setImage("url");
+        return recordResponseDto;
     }
 
     @Test
     public void successfullyCreateRecord() throws Exception {
-        RecordDto recordDto = createRecordDto();
+        RecordResponseDto recordResponseDto = createRecordDto();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(recordDto);
+        String json = objectMapper.writeValueAsString(recordResponseDto);
 
         mvc.perform(post("/records")
                 .contentType(MediaType.APPLICATION_JSON)

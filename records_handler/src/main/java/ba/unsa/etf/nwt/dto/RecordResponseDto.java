@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
-public class RecordDto implements Serializable {
+public class RecordResponseDto implements Serializable {
     @NotNull
     private PatientEntity patient;
     @NotNull

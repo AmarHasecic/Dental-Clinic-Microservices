@@ -17,6 +17,7 @@ public class RecordEntity implements Serializable {
     @OneToOne
     @JoinColumn(name = "appointment_id")
     private AppointmentEntity appointment;
+
     private String image;
 
     public Long getId() {
@@ -26,7 +27,6 @@ public class RecordEntity implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public String getImage() {

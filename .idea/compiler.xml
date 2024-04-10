@@ -12,6 +12,7 @@
         <module name="demo (4)" />
         <module name="appointment-api" />
         <module name="ConfigServer" />
+        <module name="RecordsHandler" />
         <module name="DiscoveryService" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ConfigServer" options="-parameters" />
       <module name="DiscoveryService" options="-parameters" />
+      <module name="RecordsHandler" options="-parameters" />
       <module name="appointment-api" options="-parameters" />
       <module name="demo (2)" options="-parameters" />
       <module name="demo (4)" options="-parameters" />
