@@ -2,16 +2,13 @@ package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "records")
 public class RecordEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2731425678149216052L;
     @Id
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -20,16 +17,16 @@ public class RecordEntity implements Serializable {
     @OneToOne
     @JoinColumn(name = "appointment_id")
     private AppointmentEntity appointment;
+
     private String image;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public String getImage() {

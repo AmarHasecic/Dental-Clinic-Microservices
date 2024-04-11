@@ -2,15 +2,12 @@ package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "appointments")
 public class AppointmentEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -2731425678149216052L;
     @Id
     private long id;
     private Date date;
@@ -43,7 +40,6 @@ public class AppointmentEntity implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-
 
 
     public String getNote() {

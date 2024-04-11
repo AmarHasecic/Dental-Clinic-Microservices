@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/NWT_CET_TIM4.iml" filepath="$PROJECT_DIR$/.idea/NWT_CET_TIM4.iml" />
-      <module fileurl="file://$PROJECT_DIR$/appointment_handler/demo (1).iml" filepath="$PROJECT_DIR$/appointment_handler/demo (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/appointment_handler/appointment-api.iml" filepath="$PROJECT_DIR$/appointment_handler/appointment-api.iml" />
     </modules>
   </component>
 </project>

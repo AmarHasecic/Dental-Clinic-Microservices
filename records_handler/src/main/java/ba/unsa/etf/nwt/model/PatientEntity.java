@@ -4,16 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="patients")
+@Table(name = "patients")
 public class PatientEntity implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = -2731425678149216052L;
     @Id
     private long id;
     private String address;

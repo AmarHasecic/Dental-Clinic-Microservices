@@ -6,21 +6,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="user-api" />
         <module name="demo (2)" />
-        <module name="demo" />
-        <module name="demo (1)" />
-        <module name="demo (4)" />
-        <module name="demo (3)" />
+        <module name="record-api" />
+        <module name="appointment-api" />
+        <module name="ConfigServer" />
+        <module name="DiscoveryService" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.4" />
+    <bytecodeTargetLevel>
+      <module name="demo (3)" target="1.5" />
+      <module name="demo (4)" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="demo (1)" options="-parameters" />
+      <module name="ConfigServer" options="" />
+      <module name="DiscoveryService" options="" />
+      <module name="appointment-api" options="-parameters" />
       <module name="demo (2)" options="" />
-      <module name="demo (3)" options="" />
-      <module name="demo (4)" options="" />
+      <module name="demo (4)" options="-parameters" />
+      <module name="record-api" options="" />
+      <module name="user-api" options="" />
     </option>
   </component>
 </project>

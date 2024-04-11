@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.repository;
+package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 
@@ -10,8 +10,11 @@ import java.io.Serializable;
 public class UserEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = -2731425678149216053L;
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(nullable = false, length = 50)
     private String firstName;
     @Column(nullable = false, length = 50)
@@ -20,15 +23,12 @@ public class UserEntity implements Serializable {
     private String email;
     @Column(nullable = false)
     private String password;
-    private char accessLevel;
 
-    @OneToOne
-    @JoinColumn(name = "patient_id")
-    private PatientEntity patient;
+    @Column(name = "patient_id")
+    private long patientId;
 
-    @OneToOne
-    @JoinColumn(name = "dentist_id")
-    private DentistEntity dentist;
+    @Column(name = "dentist_id")
+    private long dentistId;
 
 
     public String getPassword() {
@@ -38,6 +38,7 @@ public class UserEntity implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -53,15 +54,6 @@ public class UserEntity implements Serializable {
     public void setMail(String email) {
         this.email = email;
     }
-
-    public char getAccessLevel() {
-        return accessLevel;
-    }
-
-    public void setAccessLevel(char accessLevel) {
-        this.accessLevel = accessLevel;
-    }
-
 
     public String getLastName() {
         return lastName;
@@ -79,19 +71,19 @@ public class UserEntity implements Serializable {
         this.id = id;
     }
 
-    public PatientEntity getPatient() {
-        return patient;
+    public long getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
+    public void setPatientId(long patientId) {
+        this.patientId = patientId;
     }
 
-    public DentistEntity getDentist() {
-        return dentist;
+    public long getDentistId() {
+        return dentistId;
     }
 
-    public void setDentist(DentistEntity dentist) {
-        this.dentist = dentist;
+    public void setDentistId(long dentistId) {
+        this.dentistId = dentistId;
     }
 }
