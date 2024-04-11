@@ -10,6 +10,9 @@ public class PatientDto implements Serializable {
     private long id;
 
     @NotNull
+    private String ime;
+
+    @NotNull
     private String address;
 
     @NotNull
@@ -23,7 +26,7 @@ public class PatientDto implements Serializable {
     public PatientDto() {
     }
 
-    public PatientDto(long id, String address, Date birthDate, String phone, String gender) {
+    public PatientDto(long id, String ime, String address, Date birthDate, String phone, String gender) {
         this.id = id;
         this.address = address;
         this.birthDate = birthDate;
@@ -37,6 +40,14 @@ public class PatientDto implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
     public String getAddress() {

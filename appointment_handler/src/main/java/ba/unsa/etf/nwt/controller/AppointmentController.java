@@ -3,6 +3,7 @@ package ba.unsa.etf.nwt.controller;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
 import ba.unsa.etf.nwt.repository.AppointmentsRepository;
 import ba.unsa.etf.nwt.util.ErrorResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/appointments")
@@ -18,6 +20,7 @@ public class AppointmentController {
     @Autowired
     private AppointmentsRepository appointmentsRepository;
 
+
     @GetMapping
     public ResponseEntity<List<AppointmentEntity>> getAllAppointments() {
         List<AppointmentEntity> appointments = (List<AppointmentEntity>) appointmentsRepository.findAll();
@@ -25,7 +28,7 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createAppointment(@RequestBody AppointmentEntity appointment) {
+    public ResponseEntity<?> createAppointment(@Valid @RequestBody AppointmentEntity appointment) {
         try {
             AppointmentEntity savedAppointment = appointmentsRepository.save(appointment);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedAppointment);
@@ -36,7 +39,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateAppointment(@PathVariable Long id, @RequestBody AppointmentEntity updatedAppointment) {
+    public ResponseEntity<?> updateAppointment(@PathVariable Long id, @Valid @RequestBody AppointmentEntity updatedAppointment) {
         try {
             Optional<AppointmentEntity> existingAppointment = appointmentsRepository.findById(id);
             if (existingAppointment.isEmpty()) {
@@ -72,4 +75,28 @@ public class AppointmentController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    @GetMapping("/myappointments/{id}")
+    public ResponseEntity<?> getMyAppointments(@PathVariable Long id) {
+        try {
+
+            List<AppointmentEntity> allAppointments = StreamSupport.stream(appointmentsRepository.findAll().spliterator(), false)
+                    .toList();
+
+            List<AppointmentEntity> patientAppointments = allAppointments.stream()
+                    .filter(appointment -> appointment.getPatient().getId() == id)
+                    .toList();
+
+            if (patientAppointments.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(patientAppointments);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Error retrieving appointments", e.getMessage()));
+        }
+    }
+
+
 }

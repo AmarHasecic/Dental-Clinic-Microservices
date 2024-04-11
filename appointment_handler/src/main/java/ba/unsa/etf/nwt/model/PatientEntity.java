@@ -16,6 +16,9 @@ public class PatientEntity implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    private String ime;
     @NotNull
     private String address;
 
@@ -27,7 +30,7 @@ public class PatientEntity implements Serializable {
     @Pattern(regexp = "(Male|Female)", message = "Gender must be 'Male' or 'Female'")
     private String gender;
 
-    public PatientEntity(long id, String address, Date birthDate, String phone, String gender) {
+    public PatientEntity(long id, String ime, String address, Date birthDate, String phone, String gender) {
         this.id = id;
         this.address = address;
         this.birthDate = birthDate;
@@ -36,6 +39,14 @@ public class PatientEntity implements Serializable {
     }
 
     public PatientEntity() {
+    }
+
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
     public long getId() {

@@ -3,7 +3,7 @@ package ba.unsa.etf.nwt.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
-import java.io.Serial;
+
 import java.io.Serializable;
 
 @Entity

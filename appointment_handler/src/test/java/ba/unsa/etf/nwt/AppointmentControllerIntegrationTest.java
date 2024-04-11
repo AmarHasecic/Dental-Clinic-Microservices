@@ -52,7 +52,7 @@ public class AppointmentControllerIntegrationTest {
     @Autowired
     private DentistsRepository dentistsRepository;
 
-    PatientEntity patient = new PatientEntity(2,"Address",new Date(),"0336458795","Male");
+    PatientEntity patient = new PatientEntity(2,"Neko Nekic","Address",new Date(),"0336458795","Male");
     ServiceEntity  service = new ServiceEntity(2,"Pregled","Redovna usluga", 60);
     DentistEntity dentist = new DentistEntity(2,"8:00 - 16:00");
     AppointmentEntity appointment = new AppointmentEntity(2,new Date(),dentist,patient,service,"Redovni pregled");
@@ -78,7 +78,7 @@ public class AppointmentControllerIntegrationTest {
     @Test
     public void createAppointmentTest() throws Exception {
 
-        PatientEntity patient = new PatientEntity(2,"Address",new Date(),"0336458795","Male");
+        PatientEntity patient = new PatientEntity(2,"Neko Nekic","Address",new Date(),"0336458795","Male");
         ServiceEntity  service = new ServiceEntity(2,"Pregled","Redovna usluga", 60);
         DentistEntity dentist = new DentistEntity(2,"8:00 - 16:00");
 
@@ -120,7 +120,7 @@ public class AppointmentControllerIntegrationTest {
     @Test
     public void updateAppintmentWitIdTest() throws Exception {
 
-        PatientEntity patient = new PatientEntity(2,"Address",new Date(),"0336458795","Male");
+        PatientEntity patient = new PatientEntity(2,"Neko Nekic","Address",new Date(),"0336458795","Male");
         ServiceEntity  service = new ServiceEntity(2,"Pregled","Redovna usluga", 60);
         DentistEntity dentist = new DentistEntity(2,"8:00 - 17:00");
         AppointmentDto appointmentDto = new AppointmentDto(2L,dentist,patient,service,"Redovni pregled");
@@ -135,51 +135,12 @@ public class AppointmentControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andReturn();
     }
-}
-
-
-/*
-///////// POSSIBLE FUTURE USAGE //////////////
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-public class AppointmentControllerIntegrationTest {
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Mock
-    private PatientsRepository patientsRepository;
-
-    @Mock
-    private AppointmentsRepository appointmentsRepository;
-
-    @Mock
-    private ServicesRepository servicesRepository;
-
-    @Mock
-    private DentistsRepository dentistsRepository;
-
-    @Before
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-
-        PatientEntity patient = new PatientEntity(2, "Address", new Date(), "0336458795", "Male");
-        ServiceEntity service = new ServiceEntity(2, "Pregled", "Redovna usluga", 60);
-        DentistEntity dentist = new DentistEntity(2, "8:00 - 16:00");
-        AppointmentEntity appointmentEntity = new AppointmentEntity(2L, new Date(), dentist, patient, service, "Redovni pregled");
-
-        when(dentistsRepository.findById(2L)).thenReturn(java.util.Optional.of(dentist));
-        when(appointmentsRepository.save(any(AppointmentEntity.class))).thenReturn(appointmentEntity);
-        when(appointmentsRepository.findById(2L)).thenReturn(Optional.of(appointmentEntity));
-    }
-
 
     @Test
-    public void getAllAppointmentsTest() throws Exception {
-        mvc.perform(get("/appointments"))
+    public void getMyAppointmentsTest() throws Exception {
+
+        mvc.perform(get("/appointments/myappointments/2"))
                 .andExpect(status().isOk())
                 .andReturn();
     }
 }
-*/
