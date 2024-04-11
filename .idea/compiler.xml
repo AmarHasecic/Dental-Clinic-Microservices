@@ -9,24 +9,29 @@
         <module name="user-api" />
         <module name="demo (2)" />
         <module name="record-api" />
-        <module name="demo (4)" />
+        <module name="demo (1)" />
         <module name="appointment-api" />
         <module name="ConfigServer" />
         <module name="RecordsHandler" />
         <module name="DiscoveryService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo (3)" target="1.5" />
+      <module name="demo (4)" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ConfigServer" options="-parameters" />
-      <module name="DiscoveryService" options="-parameters" />
-      <module name="RecordsHandler" options="-parameters" />
+      <module name="ConfigServer" options="" />
+      <module name="DiscoveryService" options="" />
+      <module name="RecordsHandler" options="" />
       <module name="appointment-api" options="-parameters" />
-      <module name="demo (2)" options="-parameters" />
+      <module name="demo (1)" options="-parameters" />
+      <module name="demo (2)" options="" />
       <module name="demo (4)" options="-parameters" />
       <module name="record-api" options="-parameters" />
-      <module name="user-api" options="-parameters" />
+      <module name="user-api" options="" />
     </option>
   </component>
 </project>
