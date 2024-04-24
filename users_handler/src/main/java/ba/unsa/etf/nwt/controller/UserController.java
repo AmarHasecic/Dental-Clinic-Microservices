@@ -4,6 +4,8 @@ package ba.unsa.etf.nwt.controller;
 import ba.unsa.etf.nwt.dto.DentistDto;
 import ba.unsa.etf.nwt.dto.PatientDto;
 import ba.unsa.etf.nwt.dto.UserDto;
+import ba.unsa.etf.nwt.model.UserEntity;
+import ba.unsa.etf.nwt.repository.UsersRepository;
 import ba.unsa.etf.nwt.service.UserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -26,6 +29,9 @@ public class UserController {
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
+
+    @Autowired
+    public UsersRepository usersRepository;
 
 
 
@@ -55,6 +61,12 @@ public class UserController {
     public ResponseEntity<UserDto> findUsers(@PathVariable Long userId){
         UserDto user = userService.findUserById(userId);
         return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserEntity>> getAllUsers() {
+        List<UserEntity> users = (List<UserEntity>) usersRepository.findAll();
+        return ResponseEntity.ok(users);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

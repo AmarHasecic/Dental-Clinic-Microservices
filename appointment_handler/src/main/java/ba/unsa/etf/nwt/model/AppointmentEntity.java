@@ -2,11 +2,15 @@ package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "appointments")
 public class AppointmentEntity implements Serializable {
@@ -47,51 +51,4 @@ public class AppointmentEntity implements Serializable {
     public AppointmentEntity() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public DentistEntity getDentist() {
-        return dentist;
-    }
-
-    public void setDentist(DentistEntity dentist) {
-        this.dentist = dentist;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
-    }
-
-    public ServiceEntity getService() {
-        return service;
-    }
-
-    public void setService(ServiceEntity service) {
-        this.service = service;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
 }

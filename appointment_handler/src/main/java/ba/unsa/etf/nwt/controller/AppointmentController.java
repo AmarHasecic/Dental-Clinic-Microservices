@@ -1,5 +1,7 @@
 package ba.unsa.etf.nwt.controller;
 
+import ba.unsa.etf.nwt.dto.UserDto;
+import ba.unsa.etf.nwt.feign.AppointmentInterface;
 import ba.unsa.etf.nwt.model.AppointmentEntity;
 import ba.unsa.etf.nwt.repository.AppointmentsRepository;
 import ba.unsa.etf.nwt.util.ErrorResponse;
@@ -20,6 +22,9 @@ public class AppointmentController {
     @Autowired
     private AppointmentsRepository appointmentsRepository;
 
+    @Autowired
+    private AppointmentInterface appointmentInterface;
+
     @GetMapping("/health/status")
     public ResponseEntity<String> healthCheck(){
         return new ResponseEntity<>("Live.",HttpStatus.OK);
@@ -34,6 +39,15 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<?> createAppointment(@Valid @RequestBody AppointmentEntity appointment) {
+
+
+        //check if dentist still exists in dentists database
+
+        UserDto dentist = appointmentInterface.findUsers(appointment.getDentist().getId()).getBody();
+        if(dentist == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Dentist not found", "Dentist does not exist in Dentists database"));
+        }
+
         try {
             AppointmentEntity savedAppointment = appointmentsRepository.save(appointment);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedAppointment);
