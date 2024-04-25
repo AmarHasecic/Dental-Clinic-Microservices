@@ -13,6 +13,7 @@ public class PatientDto implements Serializable {
     private Date birthDate;
     private String phone;
     private String gender;
+    private String address;
 
 
 
@@ -80,5 +81,13 @@ public class PatientDto implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
