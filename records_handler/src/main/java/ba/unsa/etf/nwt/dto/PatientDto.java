@@ -1,21 +1,38 @@
-package ba.unsa.etf.nwt.model;
+package ba.unsa.etf.nwt.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "patients")
-public class PatientEntity implements Serializable {
-    @Id
+public class PatientDto implements Serializable {
     private long id;
+
+    @NotNull
+    private String ime;
+
+    @NotNull
     private String address;
+
+    @NotNull
     private Date birthDate;
+    @NotNull
     private String phone;
+    @NotNull
+    @Pattern(regexp = "(Male|Female)", message = "Gender must be 'Male' or 'Female'")
     private String gender;
+
+    public PatientDto() {
+    }
+
+    public PatientDto(long id, String ime, String address, Date birthDate, String phone, String gender) {
+        this.id = id;
+        this.address = address;
+        this.birthDate = birthDate;
+        this.phone = phone;
+        this.gender = gender;
+    }
 
     public long getId() {
         return id;
@@ -23,6 +40,14 @@ public class PatientEntity implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
     }
 
     public String getAddress() {

@@ -84,8 +84,8 @@ public class RecordControllerIntegrationTest {
 
         RecordEntity record = new RecordEntity();
         record.setId(1L);
-        record.setAppointment(appointment);
-        record.setPatient(patient);
+        record.setAppointmentId(appointment);
+        record.setPatientId(patient);
         record.setImage("src");
         recordsRepository.save(record);
 

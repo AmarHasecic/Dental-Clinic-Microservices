@@ -1,41 +1,30 @@
 package ba.unsa.etf.nwt.dto;
 
-import ba.unsa.etf.nwt.model.AppointmentEntity;
-import ba.unsa.etf.nwt.model.PatientEntity;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
 public class RecordResponseDto implements Serializable {
     @NotNull
-    private PatientEntity patient;
+    private Long patient;
     @NotNull
-    private AppointmentEntity appointment;
-    private String image;
+    private Long appointment;
     private Long id;
 
-    public PatientEntity getPatient() {
+    public Long getPatient() {
         return patient;
     }
 
-    public void setPatient(PatientEntity patient) {
+    public void setPatient(Long patient) {
         this.patient = patient;
     }
 
-    public AppointmentEntity getAppointment() {
+    public Long getAppointment() {
         return appointment;
     }
 
-    public void setAppointment(AppointmentEntity appointment) {
+    public void setAppointment(Long appointment) {
         this.appointment = appointment;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public Long getId() {
