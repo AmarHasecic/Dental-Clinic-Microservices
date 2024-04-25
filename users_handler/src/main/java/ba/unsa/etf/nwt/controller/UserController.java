@@ -4,6 +4,7 @@ package ba.unsa.etf.nwt.controller;
 import ba.unsa.etf.nwt.dto.DentistDto;
 import ba.unsa.etf.nwt.dto.PatientDto;
 import ba.unsa.etf.nwt.dto.UserDto;
+import ba.unsa.etf.nwt.model.ErrorResponse;
 import ba.unsa.etf.nwt.service.UserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -57,6 +59,22 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<List<UserDto>> findUsers(){
+        List<UserDto> userList = userService.findUsers();
+        if(userList.isEmpty()){
+            return new ResponseEntity<>(userList,HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(userList,HttpStatus.OK);
+    }
+
+    @PutMapping("/{userId}")
+    public void updateUser(@PathVariable Long userId, @RequestBody UserDto request){
+        UserDto userDto = userService.updateUser(request);
+        new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    }
+
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
 
@@ -67,9 +85,15 @@ public class UserController {
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<String> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
-        return new ResponseEntity<>("User with that ID already exists",HttpStatus.NOT_ACCEPTABLE);
+    public ResponseEntity<ErrorResponse> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException ex) {
+        ErrorResponse errorResponse = new ErrorResponse("User with that mail already exists", HttpStatus.NOT_ACCEPTABLE.value());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_ACCEPTABLE);
     }
+
+    // Define other exception handlers if needed
+
+    // Define ErrorResponse class
+
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
