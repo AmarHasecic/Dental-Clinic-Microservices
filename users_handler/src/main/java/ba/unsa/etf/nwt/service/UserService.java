@@ -11,5 +11,6 @@ public interface UserService {
     UserDto createDentist(DentistDto dentist);
     UserDto createPatient(PatientDto patient);
     UserDto findUserById(Long userId);
-    void updateUser(UserDto user);
+    List<UserDto> findUsers();
+    UserDto updateUser(UserDto user);
 }
