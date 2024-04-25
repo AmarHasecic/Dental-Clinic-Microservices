@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/appointment_handler/pom.xml" />
         <option value="$PROJECT_DIR$/DiscoveryService/pom.xml" />
         <option value="$PROJECT_DIR$/ConfigServer/pom.xml" />
+        <option value="$PROJECT_DIR$/system_events/pom.xml" />
+        <option value="$PROJECT_DIR$/system-events/pom.xml" />
       </list>
     </option>
   </component>

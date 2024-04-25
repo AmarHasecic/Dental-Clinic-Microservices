@@ -8,11 +8,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="user-api" />
-        <module name="ConfigServer" />
         <module name="demo (2)" />
-        <module name="DiscoveryService" />
         <module name="record-api" />
         <module name="demo (1)" />
+        <module name="system_events" />
+        <module name="ConfigServer" />
+        <module name="DiscoveryService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +31,7 @@
       <module name="demo (2)" options="-parameters" />
       <module name="demo (4)" options="-parameters" />
       <module name="record-api" options="-parameters" />
+      <module name="system_events" options="-parameters" />
       <module name="user-api" options="-parameters" />
     </option>
   </component>
