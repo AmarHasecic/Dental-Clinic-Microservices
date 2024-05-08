@@ -8,36 +8,28 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="user-api" />
-        <module name="demo (2)" />
         <module name="record-api" />
-        <module name="demo (1)" />
         <module name="system_events" />
         <module name="payments" />
+        <module name="system_events_common" />
         <module name="appointment" />
         <module name="ConfigServer" />
         <module name="DiscoveryService" />
-        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="api_gateway" target="17" />
       <module name="appointment-api" target="17" />
       <module name="demo (3)" target="1.5" />
       <module name="demo (4)" target="1.5" />
-      <module name="system_events_common" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ConfigServer" options="-parameters" />
       <module name="DiscoveryService" options="-parameters" />
-      <module name="api_gateway" options="-parameters" />
       <module name="appointment" options="-parameters" />
       <module name="appointment-api" options="-parameters" />
-      <module name="demo (1)" options="-parameters" />
-      <module name="demo (2)" options="-parameters" />
       <module name="demo (4)" options="-parameters" />
-      <module name="gateway" options="-parameters" />
       <module name="payments" options="-parameters" />
       <module name="record-api" options="-parameters" />
       <module name="system_events" options="-parameters" />

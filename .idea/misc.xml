@@ -12,14 +12,9 @@
         <option value="$PROJECT_DIR$/ConfigServer/pom.xml" />
         <option value="$PROJECT_DIR$/system_events/pom.xml" />
         <option value="$PROJECT_DIR$/system-events/pom.xml" />
-        <option value="$PROJECT_DIR$/api_gateway/pom.xml" />
-        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/system-events-common/pom.xml" />
+        <option value="$PROJECT_DIR$/system_events_common/pom.xml" />
       </list>
-    </option>
-    <option name="ignoredFiles">
-      <set>
-        <option value="$PROJECT_DIR$/api_gateway/pom.xml" />
-      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">

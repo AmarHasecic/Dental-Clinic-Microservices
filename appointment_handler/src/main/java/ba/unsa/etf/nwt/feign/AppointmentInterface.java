@@ -1,6 +1,5 @@
 package ba.unsa.etf.nwt.feign;
 
-
 import ba.unsa.etf.nwt.dto.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
