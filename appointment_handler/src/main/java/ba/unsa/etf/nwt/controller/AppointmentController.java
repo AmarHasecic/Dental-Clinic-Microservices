@@ -42,10 +42,15 @@ public class AppointmentController {
 
 
         //check if dentist still exists in dentists database
-
         UserDto dentist = appointmentInterface.findUsers(appointment.getDentist().getId()).getBody();
         if(dentist == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Dentist not found", "Dentist does not exist in Dentists database"));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Dentist not found", "Dentist does not exist in dentists database"));
+        }
+
+        //check if patient still exists in dentists database
+        UserDto patient = appointmentInterface.findUsers(appointment.getPatient().getId()).getBody();
+        if(patient == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Patient not found", "Patient does not exist in patients database"));
         }
 
         try {
