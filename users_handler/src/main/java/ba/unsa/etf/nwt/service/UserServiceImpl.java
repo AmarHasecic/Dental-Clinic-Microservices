@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -103,9 +104,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserDto user) {
+    public List<UserDto> findUsers(){
+        List<UserEntity> userList = (List<UserEntity>) usersRepository.findAll();
+
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+
+        return userList.stream().map(userEntity -> modelMapper.map(userEntity, UserDto.class)).toList();
+    }
+
+
+    @Override
+    public UserDto updateUser(UserDto user) {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         usersRepository.save(modelMapper.map(user, UserEntity.class));
+
+
+        return user;
     }
 }
