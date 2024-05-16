@@ -90,11 +90,6 @@ public class UserController {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_ACCEPTABLE);
     }
 
-    // Define other exception handlers if needed
-
-    // Define ErrorResponse class
-
-
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
         return new ResponseEntity<>(ex.getMessage(),HttpStatus.NOT_FOUND);

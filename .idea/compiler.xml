@@ -36,6 +36,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="appointment" options="-parameters" />
       <module name="appointment-api" options="-parameters" />
+      <module name="auth_service" options="-parameters" />
       <module name="demo (1)" options="-parameters" />
       <module name="demo (2)" options="-parameters" />
       <module name="demo (4)" options="-parameters" />
