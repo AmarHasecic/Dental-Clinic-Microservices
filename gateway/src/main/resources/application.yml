@@ -13,7 +13,7 @@ spring:
         predicates:
           - Path=/appointments/**
       - id: user-api
-        uri: lb://user-api
+        uri: lb://users-api
         predicates:
           - Path=/users/**
       - id: record-api
