@@ -15,7 +15,7 @@ spring:
       - id: user-api
         uri: lb://users-api
         predicates:
-          - Path=/users/**
+          - Path=/users/**,/auth/**
       - id: record-api
         uri: lb://record-api
         predicates:
