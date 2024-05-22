@@ -4,8 +4,10 @@ package ba.unsa.etf.nwt.controller;
 //import ba.unsa.etf.nwt.client.AppointmentClient;
 
 import ba.unsa.etf.nwt.client.AppointmentClient;
+import ba.unsa.etf.nwt.client.RabbitMQSender;
 import ba.unsa.etf.nwt.dto.RecordRequestDto;
 import ba.unsa.etf.nwt.dto.RecordResponseDto;
+import ba.unsa.etf.nwt.model.RecordEntity;
 import ba.unsa.etf.nwt.service.RecordServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,14 @@ public class RecordController {
     public final AppointmentClient appointmentClient;
     public final Environment env;
 
+    public final RabbitMQSender rabbitMQSender;
+
     @Autowired
-    public RecordController(RecordServiceImpl recordService, AppointmentClient appointmentClient, Environment env) {
+    public RecordController(RecordServiceImpl recordService, AppointmentClient appointmentClient, Environment env, RabbitMQSender rabbitMQSender) {
         this.recordService = recordService;
         this.appointmentClient = appointmentClient;
         this.env = env;
+        this.rabbitMQSender = rabbitMQSender;
     }
 
     @GetMapping("/health/status")
@@ -69,5 +74,16 @@ public class RecordController {
     public ResponseEntity<RecordResponseDto> updateRecord(@PathVariable Long patientId, @PathVariable Long recordId, @RequestBody RecordRequestDto request) {
         RecordResponseDto recordResponseDto = recordService.updateRecord(request);
         return new ResponseEntity<>(recordResponseDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/producemessage")
+    public String produceMessage(){
+        RecordEntity rec = new RecordEntity();
+        rec.setId(1L);
+        rec.setImage("path");
+        rec.setPatientId(1L);
+        rec.setAppointmentId(1L);
+        rabbitMQSender.send(rec);
+        return "Message sent to the RabbitMQ JavaInUse Successfully";
     }
 }

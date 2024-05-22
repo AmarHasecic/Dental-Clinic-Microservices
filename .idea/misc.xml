@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/system-events-common/pom.xml" />
         <option value="$PROJECT_DIR$/system_events_common/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/RabbitMQ/pom.xml" />
       </list>
     </option>
   </component>
