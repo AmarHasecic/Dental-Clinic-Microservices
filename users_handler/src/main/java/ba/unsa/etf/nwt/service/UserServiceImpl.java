@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     public UserServiceImpl (UsersRepository usersRepository,
-    PatientsRepository patientsRepository,
-    DentistsRepository dentistsRepository){
+                            PatientsRepository patientsRepository,
+                            DentistsRepository dentistsRepository){
         this.usersRepository = usersRepository;
         this.patientsRepository = patientsRepository;
         this.dentistsRepository = dentistsRepository;
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         DentistEntity de = dentistsRepository.save(dentistEntity);
 
         UserDto userDto = new UserDto();
-        userDto.setDentistId(de.getId());
+        userDto.setId(de.getId());
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
         userDto.setFirstName(dentist.getFirstName());
         userDto.setLastName(dentist.getLastName());
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         PatientEntity pe = patientsRepository.save(patientEntity);
 
         UserDto userDto = new UserDto();
-        userDto.setPatientId(pe.getId());
+        userDto.setId(pe.getId());
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
         userDto.setFirstName(patient.getFirstName());
         userDto.setLastName(patient.getLastName());

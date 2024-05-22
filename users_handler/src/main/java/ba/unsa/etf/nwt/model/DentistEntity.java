@@ -3,13 +3,18 @@ package ba.unsa.etf.nwt.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "dentists")
 public class DentistEntity implements Serializable {
+    @Serial
     private static final long serialVersionUID = -2731425678149216052L;
 
     @Id
@@ -28,19 +33,4 @@ public class DentistEntity implements Serializable {
         this.workHours = workHours;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours;
-    }
 }

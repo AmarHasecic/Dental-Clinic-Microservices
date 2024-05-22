@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.repository;
+package ba.unsa.etf.nwt.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,10 +1,14 @@
 package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "dentistservice")
 public class DentistServiceEntity implements Serializable {
@@ -22,36 +26,5 @@ public class DentistServiceEntity implements Serializable {
     @Column(name = "dentist_id")
     private Long dentist;
 
-    // Default constructor
-    public DentistServiceEntity() {
-    }
-
-    // Constructor with parameters
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
-    public Long getService() {
-        return service;
-    }
-
-    public void setService(Long service) {
-        this.service = service;
-    }
-
-    public Long getDentist() {
-        return dentist;
-    }
-
-    public void setDentist(Long dentist) {
-        this.dentist = dentist;
-    }
 }
 
