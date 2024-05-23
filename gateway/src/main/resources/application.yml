@@ -1,7 +1,4 @@
 spring:
-  main:
-    web-application-type: reactive
-    allow-bean-definition-overriding: true
   application:
     name: gateway
   cloud:
@@ -11,18 +8,28 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
+
       - id: appointment-api
         uri: lb://appointment-api
         predicates:
           - Path=/appointments/**
+        filters:
+          - AuthenticationFilter
+
       - id: user-api
         uri: lb://users-api
         predicates:
           - Path=/users/**,/auth/**
+        filters:
+          - AuthenticationFilter
+
       - id: record-api
         uri: lb://record-api
         predicates:
           - Path=/records/**
+        filters:
+          - AuthenticationFilter
+
 server:
   port: 8082
 
@@ -30,3 +37,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8010/eureka/
+
+security:
+  jwt:
+    secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+    expiration-time: 3600000
+

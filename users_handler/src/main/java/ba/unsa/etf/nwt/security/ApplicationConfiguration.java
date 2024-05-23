@@ -1,6 +1,7 @@
 package ba.unsa.etf.nwt.security;
 
 import ba.unsa.etf.nwt.repository.UsersRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
 
 
@@ -34,7 +35,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(@NotNull AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 

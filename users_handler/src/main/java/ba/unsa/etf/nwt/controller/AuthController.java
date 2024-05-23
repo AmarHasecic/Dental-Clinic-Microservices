@@ -7,8 +7,11 @@ import ba.unsa.etf.nwt.model.UserEntity;
 import ba.unsa.etf.nwt.security.LoginResponse;
 import ba.unsa.etf.nwt.security.AuthenticationService;
 import ba.unsa.etf.nwt.security.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth")
@@ -17,6 +20,9 @@ public class AuthController {
     private JwtService jwtService;
 
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     public void AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
         this.jwtService = jwtService;
@@ -46,5 +52,18 @@ public class AuthController {
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
 
         return ResponseEntity.ok(loginResponse);
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<String> validateToken(@RequestParam("token") String token) {
+
+        String username = jwtService.extractUsername(token);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        if (jwtService.isTokenValid(token,userDetails)) {
+            return ResponseEntity.ok("Token is valid");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token is invalid");
+        }
     }
 }
