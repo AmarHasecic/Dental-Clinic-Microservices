@@ -27,21 +27,20 @@ public class UserServiceImpl implements UserService {
     PatientsRepository patientsRepository;
     DentistsRepository dentistsRepository;
 
-    @Autowired
-    public UserServiceImpl (UsersRepository usersRepository,
-    PatientsRepository patientsRepository,
-    DentistsRepository dentistsRepository){
+    final RabbitMQSender rabbitMQSender;
+
+    private
+
+    @Autowired UserServiceImpl(UsersRepository usersRepository, PatientsRepository patientsRepository, DentistsRepository dentistsRepository, RabbitMQSender rabbitMQSender){
         this.usersRepository = usersRepository;
         this.patientsRepository = patientsRepository;
         this.dentistsRepository = dentistsRepository;
+        this.rabbitMQSender = rabbitMQSender;
     }
-
-
-
 
     @Override
     public
-    UserDto createDentist(DentistDto dentist) {
+    UserDto createDentist(DentistDto dentist){
         dentist.setId(Math.abs((new SecureRandom()).nextLong()));
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -64,6 +63,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(UserEntity);
         UserEntity ue = usersRepository.save(UserEntity);
 
+        rabbitMQSender.sendDentist(de);
         return modelMapper.map(ue, UserDto.class);
     }
 
@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
         System.out.println(UserEntity);
         UserEntity ue = usersRepository.save(UserEntity);
 
+        rabbitMQSender.sendPatient(pe);
         return modelMapper.map(ue, UserDto.class);
     }
 

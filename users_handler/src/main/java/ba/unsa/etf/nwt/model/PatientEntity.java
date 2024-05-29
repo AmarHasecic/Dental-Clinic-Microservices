@@ -59,4 +59,9 @@ public class PatientEntity implements Serializable {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    @Override
+    public java.lang.String toString() {
+        return "{id: "+ this.id + ",workHours:"+this.address + ",birthDate:" + this.birthDate + ",phone:" + this.phone + ",gender" + this.gender + "}";
+    }
 }
