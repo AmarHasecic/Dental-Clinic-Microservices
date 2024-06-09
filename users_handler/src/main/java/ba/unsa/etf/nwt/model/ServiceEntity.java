@@ -1,14 +1,10 @@
 package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-@Setter
-@Getter
 @Entity
 @Table(name = "services")
 public class ServiceEntity implements Serializable {
@@ -23,4 +19,35 @@ public class ServiceEntity implements Serializable {
     private String type;
     private int price;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }

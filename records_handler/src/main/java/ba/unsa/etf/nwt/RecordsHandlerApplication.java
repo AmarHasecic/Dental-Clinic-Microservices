@@ -12,4 +12,5 @@ public class RecordsHandlerApplication {
     public static void main(String[] args) {
         SpringApplication.run(RecordsHandlerApplication.class, args);
     }
+
 }

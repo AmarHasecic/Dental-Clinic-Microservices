@@ -9,6 +9,7 @@ import ba.unsa.etf.nwt.service.UserServiceImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,16 +18,20 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
-    final UserServiceImpl userService;
+    final
+    UserServiceImpl userService;
 
+    @Autowired
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 
 
-    @PostMapping("/users/dentist")
+
+    @PostMapping("/dentist")
     public ResponseEntity<UserDto> createDentist(@RequestBody DentistDto request){
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -36,7 +41,7 @@ public class UserController {
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
-    @PostMapping("/users/patient")
+    @PostMapping("/patient")
     public ResponseEntity<UserDto> createPatient(@RequestBody PatientDto request){
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -48,13 +53,13 @@ public class UserController {
 
 
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<UserDto> findUsers(@PathVariable Long userId){
         UserDto user = userService.findUserById(userId);
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public ResponseEntity<List<UserDto>> findUsers(){
         List<UserDto> userList = userService.findUsers();
         if(userList.isEmpty()){
@@ -63,11 +68,12 @@ public class UserController {
         return new ResponseEntity<>(userList,HttpStatus.OK);
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/{userId}")
     public void updateUser(@PathVariable Long userId, @RequestBody UserDto request){
         UserDto userDto = userService.updateUser(request);
         new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
+
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException ex) {
@@ -83,6 +89,11 @@ public class UserController {
         ErrorResponse errorResponse = new ErrorResponse("User with that mail already exists", HttpStatus.NOT_ACCEPTABLE.value());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_ACCEPTABLE);
     }
+
+    // Define other exception handlers if needed
+
+    // Define ErrorResponse class
+
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {

@@ -7,15 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="record-api" />
-        <module name="system_events" />
-        <module name="payments" />
-        <module name="appointment" />
         <module name="user-api" />
         <module name="demo (2)" />
         <module name="demo (1)" />
+        <module name="system_events" />
+        <module name="payments" />
         <module name="api-gateway" />
         <module name="system_events_common" />
+        <module name="appointment" />
         <module name="ConfigServer" />
         <module name="RecordsHandler" />
         <module name="DiscoveryService" />
@@ -23,7 +22,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="appointment-api" target="17" />
-      <module name="auth_service" target="17" />
       <module name="demo (3)" target="1.5" />
       <module name="demo (4)" target="1.5" />
       <module name="RabbitMQ" target="17" />
@@ -38,7 +36,6 @@
       <module name="api-gateway" options="-parameters" />
       <module name="appointment" options="-parameters" />
       <module name="appointment-api" options="-parameters" />
-      <module name="auth_service" options="-parameters" />
       <module name="demo (1)" options="-parameters" />
       <module name="demo (2)" options="-parameters" />
       <module name="demo (4)" options="-parameters" />

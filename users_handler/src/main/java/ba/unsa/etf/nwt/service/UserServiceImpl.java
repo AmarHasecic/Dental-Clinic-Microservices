@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         DentistEntity de = dentistsRepository.save(dentistEntity);
 
         UserDto userDto = new UserDto();
-        userDto.setId(de.getId());
+        userDto.setDentistId(de.getId());
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
         userDto.setFirstName(dentist.getFirstName());
         userDto.setLastName(dentist.getLastName());
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
         PatientEntity pe = patientsRepository.save(patientEntity);
 
         UserDto userDto = new UserDto();
-        userDto.setId(pe.getId());
+        userDto.setPatientId(pe.getId());
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
         userDto.setFirstName(patient.getFirstName());
         userDto.setLastName(patient.getLastName());

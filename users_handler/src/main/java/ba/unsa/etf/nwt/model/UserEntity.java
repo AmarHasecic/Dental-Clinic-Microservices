@@ -1,24 +1,18 @@
 package ba.unsa.etf.nwt.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 @Table(name="users")
-public class UserEntity implements UserDetails {
+public class UserEntity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -2731425678149216053L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, length = 50)
@@ -36,33 +30,60 @@ public class UserEntity implements UserDetails {
     @Column(name = "dentist_id")
     private long dentistId;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+
+    public String getPassword() {
+        return password;
     }
 
-    @Override
-    public String getUsername() {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getMail() {
         return email;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void setMail(String email) {
+        this.email = email;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public String getLastName() {
+        return lastName;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(long patientId) {
+        this.patientId = patientId;
+    }
+
+    public long getDentistId() {
+        return dentistId;
+    }
+
+    public void setDentistId(long dentistId) {
+        this.dentistId = dentistId;
     }
 }
