@@ -37,7 +37,6 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<UserEntity> register(@RequestBody RegisterUserDto registerUserDto) {
         UserEntity registeredUser = authenticationService.signup(registerUserDto);
-
         return ResponseEntity.ok(registeredUser);
     }
 
@@ -65,5 +64,10 @@ public class AuthController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token is invalid");
         }
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> checkIfBreathing() {
+        return ResponseEntity.status(HttpStatus.OK).body("Alive!");
     }
 }

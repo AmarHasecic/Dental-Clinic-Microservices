@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     private RouteValidator validator;
 
     @Autowired
-    private RestTemplate template;
+    private RestTemplate restTemplate;
 
     public AuthenticationFilter() {
         super(Config.class);
@@ -38,20 +37,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     authHeader = authHeader.substring(7);
                 }
 
-                //TODO: Make this GET quest work...
-
-                String url = UriComponentsBuilder.fromHttpUrl("http://USERS-API/auth/validate")
-                        .queryParam("token", authHeader)
-                        .toUriString();
-                ResponseEntity<String> response = template.getForEntity(url, String.class);
-
-                // Reading the response status
-                int statusCode = response.getStatusCodeValue();
-                String responseBody = response.getBody();
-
-                if (statusCode != 200) {
-                    throw new RuntimeException("Failed to validate token: " + responseBody);
+                String url = "http://userhandler:8091/auth/validate?token=" + authHeader;
+                ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+                if (response.getStatusCodeValue() != 200) {
+                    throw new RuntimeException("Failed to validate token: " + response.getBody());
                 }
+
             }
             return chain.filter(exchange);
         });

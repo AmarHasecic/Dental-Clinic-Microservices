@@ -54,7 +54,7 @@ services:
 
   api_gateway:
     build:
-      context: ./users_handler
+      context: ./gateway
       dockerfile: Dockerfile
     container_name: gateway
     ports:
