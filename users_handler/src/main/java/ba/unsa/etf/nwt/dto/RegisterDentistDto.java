@@ -1,23 +1,21 @@
 package ba.unsa.etf.nwt.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
-@Setter
 @Getter
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
-public class DentistDto implements Serializable {
+@AllArgsConstructor
+public class RegisterDentistDto {
 
-    private Long id;
-    private String mail;
+    private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private String workHours;
+    private String workingHours;
 
 }

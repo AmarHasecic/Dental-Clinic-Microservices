@@ -13,19 +13,17 @@ public class DentistEntity implements Serializable {
     private static final long serialVersionUID = -2731425678149216052L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "Work hours must not be blank")
     @Pattern(regexp = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\\s?-[\\s]?(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$", message = "Invalid work hours format")
-    private String workHours;
+    private String workingHours;
 
     public DentistEntity() {
     }
 
-    // Constructor with workHours parameter
     public DentistEntity(String workHours) {
-        this.workHours = workHours;
+        this.workingHours = workHours;
     }
 
     public long getId() {

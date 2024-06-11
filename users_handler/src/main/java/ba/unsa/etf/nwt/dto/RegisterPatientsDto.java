@@ -1,17 +1,20 @@
 package ba.unsa.etf.nwt.dto;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
-@Setter
 @Getter
-public class PatientDto implements Serializable {
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RegisterPatientsDto {
 
-    private Long id;
-    private String mail;
+    private String email;
     private String password;
     private String firstName;
     private String lastName;
@@ -19,5 +22,4 @@ public class PatientDto implements Serializable {
     private String phone;
     private String gender;
     private String address;
-
 }

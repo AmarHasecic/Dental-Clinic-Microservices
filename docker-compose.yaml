@@ -1,0 +1,64 @@
+services:
+  discovery_service:
+    build:
+      context: ./DiscoveryService
+      dockerfile: Dockerfile
+    container_name: discoveryservice
+    ports:
+      - "8010:8010"
+    environment:
+      - SPRING_APPLICATION_NAME=DiscoveryService
+      - SERVER_PORT=8010
+      - EUREKA_INSTANCE_HOSTNAME=discoveryservice
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
+
+  appointment_handler:
+    build:
+      context: ./appointment_handler
+      dockerfile: Dockerfile
+    container_name: appointmenthandler
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_APPLICATION_NAME=appointment-api
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_URL=jdbc:mysql://sql.freedb.tech:3306/freedb_appointment_handler_database
+      - SPRING_DATASOURCE_USERNAME=freedb_ahasecic1
+      - SPRING_DATASOURCE_PASSWORD=@VZ7RndeJQZ%8pU
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
+    depends_on:
+      - discovery_service
+
+  user_handler:
+    build:
+      context: ./users_handler
+      dockerfile: Dockerfile
+    container_name: userhandler
+    ports:
+      - "8091:8091"
+    environment:
+      - SPRING_APPLICATION_NAME=users-api
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_URL=jdbc:mysql://sql.freedb.tech:3306/freedb_user_handler_database
+      - SPRING_DATASOURCE_USERNAME=freedb_ahasecic2
+      - SPRING_DATASOURCE_PASSWORD=@?@%RFnacVByk$5
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
+    depends_on:
+      - discovery_service
+
+  api_gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    ports:
+      - "8092:8092"
+    environment:
+      - SPRING_APPLICATION_NAME=gateway
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
+    depends_on:
+      - discovery_service
