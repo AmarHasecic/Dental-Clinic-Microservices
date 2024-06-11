@@ -20,5 +20,4 @@ public class DentistDto implements Serializable {
     private String lastName;
     private String workHours;
 
-
 }

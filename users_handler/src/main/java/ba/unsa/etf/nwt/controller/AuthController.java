@@ -2,7 +2,10 @@ package ba.unsa.etf.nwt.controller;
 
 
 import ba.unsa.etf.nwt.dto.LoginUserDto;
-import ba.unsa.etf.nwt.dto.RegisterUserDto;
+import ba.unsa.etf.nwt.dto.RegisterDentistDto;
+import ba.unsa.etf.nwt.dto.RegisterPatientsDto;
+import ba.unsa.etf.nwt.model.DentistEntity;
+import ba.unsa.etf.nwt.model.PatientEntity;
 import ba.unsa.etf.nwt.model.UserEntity;
 import ba.unsa.etf.nwt.security.LoginResponse;
 import ba.unsa.etf.nwt.security.AuthenticationService;
@@ -34,9 +37,15 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<UserEntity> register(@RequestBody RegisterUserDto registerUserDto) {
-        UserEntity registeredUser = authenticationService.signup(registerUserDto);
+    @PostMapping("/signup/dentist")
+    public ResponseEntity<DentistEntity> registerDentist(@RequestBody RegisterDentistDto registerDentistDto) {
+        DentistEntity registeredUser = authenticationService.signupDentist(registerDentistDto);
+        return ResponseEntity.ok(registeredUser);
+    }
+
+    @PostMapping("/signup/patient")
+    public ResponseEntity<PatientEntity> registerPatient(@RequestBody RegisterPatientsDto registerPatientsDto) {
+        PatientEntity registeredUser = authenticationService.signupPatient(registerPatientsDto);
         return ResponseEntity.ok(registeredUser);
     }
 
