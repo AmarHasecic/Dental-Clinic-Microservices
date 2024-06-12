@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class UserDto implements Serializable {
 
     private Long id;
-    private String mail;
+    private String email;
     private String password;
     private String firstName;
     private String lastName;

@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
         userDto.setFirstName(dentist.getFirstName());
         userDto.setLastName(dentist.getLastName());
-        userDto.setMail(dentist.getMail());
+        userDto.setEmail(dentist.getMail());
         userDto.setPassword(dentist.getPassword());
 
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
         userDto.setFirstName(patient.getFirstName());
         userDto.setLastName(patient.getLastName());
-        userDto.setMail(patient.getMail());
+        userDto.setEmail(patient.getMail());
         userDto.setPassword(patient.getPassword());
 
         userDto.setId(Math.abs((new SecureRandom()).nextLong()));
