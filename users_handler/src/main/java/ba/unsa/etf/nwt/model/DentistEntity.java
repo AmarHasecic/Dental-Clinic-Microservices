@@ -21,7 +21,7 @@ public class DentistEntity implements Serializable {
     private long id;
 
     @NotBlank(message = "Work hours must not be blank")
-    @Pattern(regexp = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\\s?-[\\s]?(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$", message = "Invalid work hours format")
+    @Pattern(regexp = "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\\s?-\\s?(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$", message = "Invalid work hours format")
     private String workingHours;
 
     public DentistEntity() {
