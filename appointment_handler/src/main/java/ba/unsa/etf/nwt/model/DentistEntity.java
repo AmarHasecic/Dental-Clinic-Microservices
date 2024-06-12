@@ -1,5 +1,7 @@
 package ba.unsa.etf.nwt.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -7,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "dentists")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = DentistEntity.class)
 public class DentistEntity implements Serializable {
 
     @Id
@@ -36,5 +39,10 @@ public class DentistEntity implements Serializable {
 
     public void setWorkHours(String workHours) {
         this.workHours = workHours;
+    }
+
+    @Override
+    public java.lang.String toString() {
+        return "{id: "+ this.id + ",workHours:"+this.workHours+"}";
     }
 }

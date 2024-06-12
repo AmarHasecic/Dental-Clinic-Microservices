@@ -31,4 +31,9 @@ public class DentistEntity implements Serializable {
         this.workingHours = workHours;
     }
 
+    @Override
+    public java.lang.String toString() {
+        return "{id: "+ this.id + ",workHours:"+this.workingHours+"}";
+    }
+
 }

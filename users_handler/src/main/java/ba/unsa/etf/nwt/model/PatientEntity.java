@@ -23,4 +23,9 @@ public class PatientEntity implements Serializable {
     private Date birthDate;
     private String phone;
     private String gender;
+
+    @Override
+    public java.lang.String toString() {
+        return "{id: "+ this.id + ",workHours:"+this.address + ",birthDate:" + this.birthDate + ",phone:" + this.phone + ",gender" + this.gender + "}";
+    }
 }
