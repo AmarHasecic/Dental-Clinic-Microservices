@@ -50,7 +50,7 @@ services:
       - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
     depends_on:
       - discovery_service
-      - userdbgit a
+      - userdb
 
   api_gateway:
     build:
