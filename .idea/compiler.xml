@@ -11,6 +11,7 @@
         <module name="system_events" />
         <module name="payments" />
         <module name="appointment" />
+        <module name="appointment-api" />
         <module name="user-api" />
         <module name="demo (2)" />
         <module name="demo (1)" />
@@ -22,7 +23,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="appointment-api" target="17" />
       <module name="auth_service" target="17" />
       <module name="demo (3)" target="1.5" />
       <module name="demo (4)" target="1.5" />
