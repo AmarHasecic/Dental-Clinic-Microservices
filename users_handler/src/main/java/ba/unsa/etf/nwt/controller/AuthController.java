@@ -10,6 +10,7 @@ import ba.unsa.etf.nwt.model.UserEntity;
 import ba.unsa.etf.nwt.security.LoginResponse;
 import ba.unsa.etf.nwt.security.AuthenticationService;
 import ba.unsa.etf.nwt.security.JwtService;
+import ba.unsa.etf.nwt.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class AuthController {
     private JwtService jwtService;
 
     private AuthenticationService authenticationService;
+    final UserServiceImpl userService;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -32,9 +34,10 @@ public class AuthController {
         this.authenticationService = authenticationService;
     }
 
-    public AuthController(JwtService jwtService, AuthenticationService authenticationService) {
+    public AuthController(JwtService jwtService, AuthenticationService authenticationService, UserServiceImpl userService) {
         this.jwtService = jwtService;
         this.authenticationService = authenticationService;
+        this.userService = userService;
     }
 
     @PostMapping("/signup/dentist")
@@ -58,6 +61,9 @@ public class AuthController {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(jwtToken);
         loginResponse.setExpiresIn(jwtService.getExpirationTime());
+
+
+        loginResponse.setRole(authenticatedUser.getRole());
 
         return ResponseEntity.ok(loginResponse);
     }

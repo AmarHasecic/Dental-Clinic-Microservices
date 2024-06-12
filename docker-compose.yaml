@@ -24,13 +24,14 @@ services:
     environment:
       - SPRING_APPLICATION_NAME=appointment-api
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_DATASOURCE_URL=jdbc:mysql://sql.freedb.tech:3306/freedb_appointment_handler_database
-      - SPRING_DATASOURCE_USERNAME=freedb_ahasecic1
-      - SPRING_DATASOURCE_PASSWORD=@VZ7RndeJQZ%8pU
+      - SPRING_DATASOURCE_URL=jdbc:mysql://appointmentdb:3306/appointment_handler_database
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=appointmentpassword
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
       - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
     depends_on:
       - discovery_service
+      - appointmentdb
 
   user_handler:
     build:
@@ -42,13 +43,14 @@ services:
     environment:
       - SPRING_APPLICATION_NAME=users-api
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_DATASOURCE_URL=jdbc:mysql://sql.freedb.tech:3306/freedb_user_handler_database
-      - SPRING_DATASOURCE_USERNAME=freedb_ahasecic2
-      - SPRING_DATASOURCE_PASSWORD=@?@%RFnacVByk$5
+      - SPRING_DATASOURCE_URL=jdbc:mysql://userdb:3306/user_handler_database
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=userpassword
       - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
       - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
     depends_on:
       - discovery_service
+      - userdbgit a
 
   api_gateway:
     build:
@@ -62,3 +64,32 @@ services:
       - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
     depends_on:
       - discovery_service
+
+
+  appointmentdb:
+    image: mysql:8.0
+    container_name: appointmentdb
+    environment:
+      - MYSQL_ROOT_PASSWORD=appointmentpassword
+      - MYSQL_DATABASE=appointment_handler_database
+    ports:
+      - "3306:3306"
+    volumes:
+      - appointmentdb_data:/var/lib/mysql
+
+  userdb:
+    image: mysql:8.0
+    container_name: userdb
+    environment:
+      - MYSQL_ROOT_PASSWORD=userpassword
+      - MYSQL_DATABASE=user_handler_database
+    ports:
+      - "3307:3306"
+    volumes:
+      - userdb_data:/var/lib/mysql
+
+volumes:
+  appointmentdb_data:
+  userdb_data:
+
+

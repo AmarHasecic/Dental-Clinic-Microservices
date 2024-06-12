@@ -44,6 +44,7 @@ public class AuthenticationService {
         user.setLastName(input.getLastName());
         user.setEmail(input.getEmail());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setRole("DENTIST");
         UserEntity savedUser = userRepository.save(user);
 
         DentistEntity dentist = new DentistEntity();
@@ -60,6 +61,7 @@ public class AuthenticationService {
         user.setLastName(input.getLastName());
         user.setEmail(input.getEmail());
         user.setPassword(passwordEncoder.encode(input.getPassword()));
+        user.setRole("PATIENT");
         UserEntity savedUser = userRepository.save(user);
 
 

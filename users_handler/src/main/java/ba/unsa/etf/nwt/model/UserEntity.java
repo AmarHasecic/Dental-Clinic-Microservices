@@ -29,6 +29,9 @@ public class UserEntity implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private String role;
+
 
     @Column(name = "patient_id")
     private long patientId;
