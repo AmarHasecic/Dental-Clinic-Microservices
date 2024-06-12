@@ -14,6 +14,8 @@
         <module name="user-api" />
         <module name="demo (2)" />
         <module name="demo (1)" />
+        <module name="demo (4)" />
+        <module name="demo (3)" />
         <module name="api-gateway" />
         <module name="system_events_common" />
         <module name="ConfigServer" />
@@ -24,8 +26,6 @@
     <bytecodeTargetLevel>
       <module name="appointment-api" target="17" />
       <module name="auth_service" target="17" />
-      <module name="demo (3)" target="1.5" />
-      <module name="demo (4)" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -39,6 +39,7 @@
       <module name="auth_service" options="-parameters" />
       <module name="demo (1)" options="-parameters" />
       <module name="demo (2)" options="-parameters" />
+      <module name="demo (3)" options="-parameters" />
       <module name="demo (4)" options="-parameters" />
       <module name="payments" options="-parameters" />
       <module name="record-api" options="-parameters" />

@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/appointments")
 public class AppointmentController {
 
