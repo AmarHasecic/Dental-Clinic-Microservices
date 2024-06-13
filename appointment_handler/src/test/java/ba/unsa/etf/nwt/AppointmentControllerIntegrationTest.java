@@ -54,7 +54,7 @@ public class AppointmentControllerIntegrationTest {
 
     PatientEntity patient = new PatientEntity(2,"Neko Nekic","Address",new Date(),"0336458795","Male");
     ServiceEntity  service = new ServiceEntity(2,"Pregled","Redovna usluga", 60);
-    DentistEntity dentist = new DentistEntity(2,"8:00 - 16:00");
+    DentistEntity dentist = new DentistEntity(2,"8-16");
     AppointmentEntity appointment = new AppointmentEntity(2,new Date(),dentist,patient,service,"Redovni pregled");
 
     @Before
@@ -80,7 +80,7 @@ public class AppointmentControllerIntegrationTest {
 
         PatientEntity patient = new PatientEntity(2,"Neko Nekic","Address",new Date(),"0336458795","Male");
         ServiceEntity  service = new ServiceEntity(2,"Pregled","Redovna usluga", 60);
-        DentistEntity dentist = new DentistEntity(2,"8:00 - 16:00");
+        DentistEntity dentist = new DentistEntity(2,"8-16");
 
         AppointmentDto appointmentDto = new AppointmentDto(2L,dentist,patient,service,"Redovni pregled");
 
@@ -122,7 +122,7 @@ public class AppointmentControllerIntegrationTest {
 
         PatientEntity patient = new PatientEntity(2,"Neko Nekic","Address",new Date(),"0336458795","Male");
         ServiceEntity  service = new ServiceEntity(2,"Pregled","Redovna usluga", 60);
-        DentistEntity dentist = new DentistEntity(2,"8:00 - 17:00");
+        DentistEntity dentist = new DentistEntity(2,"8-17");
         AppointmentDto appointmentDto = new AppointmentDto(2L,dentist,patient,service,"Redovni pregled");
 
 
