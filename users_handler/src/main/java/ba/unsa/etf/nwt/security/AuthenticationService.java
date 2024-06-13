@@ -9,6 +9,7 @@ import ba.unsa.etf.nwt.model.UserEntity;
 import ba.unsa.etf.nwt.repository.DentistsRepository;
 import ba.unsa.etf.nwt.repository.PatientsRepository;
 import ba.unsa.etf.nwt.repository.UsersRepository;
+import ba.unsa.etf.nwt.service.RabbitMQSender;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +21,7 @@ public class AuthenticationService {
     private final UsersRepository userRepository;
     private final DentistsRepository dentistsRepository;
     private final PatientsRepository patientsRepository;
+    private final RabbitMQSender rabbitMQSender;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -28,13 +30,15 @@ public class AuthenticationService {
     public AuthenticationService(
             UsersRepository userRepository, DentistsRepository dentistsRepository, PatientsRepository patientsRepository,
             AuthenticationManager authenticationManager,
-            PasswordEncoder passwordEncoder
+            PasswordEncoder passwordEncoder,
+            RabbitMQSender rabbitMQSender
     ) {
         this.dentistsRepository = dentistsRepository;
         this.patientsRepository = patientsRepository;
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.rabbitMQSender = rabbitMQSender;
     }
 
     public DentistEntity signupDentist(@NotNull RegisterDentistDto input) {
@@ -50,7 +54,7 @@ public class AuthenticationService {
         DentistEntity dentist = new DentistEntity();
         dentist.setId(savedUser.getId());
         dentist.setWorkingHours(input.getWorkingHours());
-
+        rabbitMQSender.sendDentist(dentist);
         return dentistsRepository.save(dentist);
     }
 
@@ -71,7 +75,7 @@ public class AuthenticationService {
         patient.setPhone(input.getPhone());
         patient.setGender(input.getGender());
         patient.setBirthDate(input.getBirthDate());
-
+        rabbitMQSender.sendPatient(patient);
         return patientsRepository.save(patient);
     }
 
