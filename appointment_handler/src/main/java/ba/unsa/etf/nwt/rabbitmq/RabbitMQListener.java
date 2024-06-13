@@ -27,7 +27,7 @@ public class RabbitMQListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
         String jsonMessage = new String(message.getBody());
-        if (jsonMessage.contains("workHours")) {
+        if (jsonMessage.contains("workingHours")) {
             try {
                 DentistEntity dentistEntity = objectMapper.readValue(jsonMessage, DentistEntity.class);
                 dentistEntity = dentistsRepository.save(dentistEntity);
