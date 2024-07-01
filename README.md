@@ -11,7 +11,7 @@ This project is a Spring Boot application designed to manage the microservices f
 
 ### Clone the Repository
 
-git clone https://github.com/AmarHasecic/Dental-Clinic-Microservices.git
+git clone https://github.com/AmarHasecic/Dental-Clinic-Microservices.git </br>
 cd Dental-Clinic-Microservices
 
 ### Run the Application
