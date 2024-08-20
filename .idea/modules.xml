@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/NWT_CET_TIM4.iml" filepath="$PROJECT_DIR$/.idea/NWT_CET_TIM4.iml" />
       <module fileurl="file://$PROJECT_DIR$/appointment_handler/appointment-api.iml" filepath="$PROJECT_DIR$/appointment_handler/appointment-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/payments_handler/payments-api.iml" filepath="$PROJECT_DIR$/payments_handler/payments-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/system_evets/system_evets.iml" filepath="$PROJECT_DIR$/system_evets/system_evets.iml" />
     </modules>
   </component>
 </project>

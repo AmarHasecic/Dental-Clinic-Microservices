@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.system_events;
+package system_events;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

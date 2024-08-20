@@ -1,4 +1,4 @@
-package ba.unsa.etf.nwt.system_events;
+package system_events;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
