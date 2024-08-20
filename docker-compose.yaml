@@ -82,6 +82,25 @@ services:
       - userdb
       - rabbitmq
 
+  system_events:
+    build:
+      context: ./system_events
+      dockerfile: Dockerfile
+    container_name: systemevents
+    ports:
+      - "8093:8093"
+    environment:
+      - SPRING_APPLICATION_NAME=system_events
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_URL=jdbc:mysql://systemeventsdb:3306/system_events_database
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=userpassword
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULT_ZONE=http://discoveryservice:8010/eureka
+    depends_on:
+      - discovery_service
+      - systemeventsdb
+
   api_gateway:
     build:
       context: ./gateway
@@ -95,7 +114,6 @@ services:
     depends_on:
       - discovery_service
       - broker
-
 
   appointmentdb:
     image: mysql:8.0
@@ -119,8 +137,19 @@ services:
     volumes:
       - userdb_data:/var/lib/mysql
 
+  systemeventsdb:
+    image: mysql:8.0
+    container_name: systemeventsdb
+    environment:
+      - MYSQL_ROOT_PASSWORD=systemeventspassword
+      - MYSQL_DATABASE=system_events_database
+    ports:
+      - "3308:3306"
+    volumes:
+      - systemeventsdb_data:/var/lib/mysql
 volumes:
   appointmentdb_data:
   userdb_data:
+  systemeventsdb_data:
 
 
