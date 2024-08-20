@@ -31,6 +31,11 @@ spring:
           - Path=/records/**
         filters:
           - AuthenticationFilter
+  kafka:
+    bootstrap-servers: broker:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 server:
   port: 8092
@@ -44,3 +49,4 @@ security:
   jwt:
     secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
     expiration-time: 3600000
+
