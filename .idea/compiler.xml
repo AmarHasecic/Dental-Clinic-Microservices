@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="record-api" />
         <module name="payments" />
+        <module name="system_events" />
         <module name="appointment" />
         <module name="appointment-api" />
         <module name="user-api" />
@@ -24,7 +25,6 @@
       <module name="demo (2)" target="17" />
       <module name="demo (3)" target="1.5" />
       <module name="demo (4)" target="1.5" />
-      <module name="system_events" target="17" />
       <module name="system_events_common" target="17" />
     </bytecodeTargetLevel>
   </component>
